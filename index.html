@@ -108,7 +108,7 @@
       height: 45.29%;
     }
     .screen.happy .hero { background: var(--hero-green); }
-    .screen.sad .hero   { background: var(--hero-blue); }
+    .screen.sad .hero   { background: var(--hero-green); }
 
     .cat, .fire {
       position: absolute;
@@ -117,9 +117,9 @@
 
     /* medium scene placement, with a gap between cat and fire */
     .screen.happy .cat  { left: 7%; top: 8.3%; width: 53.6%; }
-    .screen.happy .fire { left: 54%; top: 17.2%; width: 35.7%; }
+    .screen.happy .fire { left: 49.45%; top: 17.2%; width: 35.7%; }
     .screen.sad .cat    { left: 3.5%; top: 8.4%; width: 57%; }
-    .screen.sad .fire   { left: 55.5%; top: 14.9%; width: 35.3%; }
+    .screen.sad .fire   { left: 50.95%; top: 14.9%; width: 35.3%; }
 
     .card {
       position: absolute;
@@ -201,6 +201,8 @@
       height: 8.6cqw;
       z-index: 4;
     }
+    /* без прогресс-бара крестик поднимается выше */
+    .screen.sad .close { top: 16cqw; }
 
     /* ---- Dynamic Island + status bar ---- */
     .island {
