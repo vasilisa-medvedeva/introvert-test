@@ -65,6 +65,12 @@
     .stage {
       position: relative;
       display: flex;
+      flex-direction: column;
+      gap: clamp(28px, 6vh, 64px);
+      align-items: center;
+    }
+    .row {
+      display: flex;
       flex-wrap: wrap;
       gap: clamp(24px, 6vw, 72px);
       justify-content: center;
@@ -104,13 +110,17 @@
       display: block;
     }
 
-    /* happy screen placement */
-    .screen.happy .cat  { left: 1%;  top: 4.5%;  width: 63%; }
-    .screen.happy .fire { left: 51%; top: 13.6%; width: 42%; }
+    /* full-size scene placement */
+    .screen.happy .cat  { left: 1%;    top: 4.5%;  width: 63%; }
+    .screen.happy .fire { left: 51%;   top: 13.6%; width: 42%; }
+    .screen.sad .cat    { left: 0%;    top: 4.7%;  width: 67%; }
+    .screen.sad .fire   { left: 51.5%; top: 11.4%; width: 41.5%; }
 
-    /* sad screen placement (same fire spot, cat slightly wider drawing) */
-    .screen.sad .cat  { left: 0%;  top: 4.7%;  width: 67%; }
-    .screen.sad .fire { left: 51.5%; top: 11.4%; width: 41.5%; }
+    /* compact scene placement (smaller animation, same ground line) */
+    .screen.compact.happy .cat  { left: 17.8%; top: 16.1%; width: 44%; }
+    .screen.compact.happy .fire { left: 52.8%; top: 20.6%; width: 29.4%; }
+    .screen.compact.sad .cat    { left: 17.4%; top: 16.2%; width: 46.9%; }
+    .screen.compact.sad .fire   { left: 53.5%; top: 18.7%; width: 29%; }
 
     .card {
       position: absolute;
@@ -155,14 +165,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 7.6cqw 0 9.6cqw;
+      padding: 0 8cqw 0 11cqw;
       height: 7cqw;
       color: #fff;
       font-size: 4.1cqw;
       font-weight: 600;
       letter-spacing: .02em;
+      font-variant-numeric: tabular-nums;
     }
-    .status svg { width: 18.5cqw; height: auto; display: block; }
+    .status svg { width: 15cqw; height: auto; display: block; }
 
     @keyframes twinkle {
       from { opacity: .3; }
@@ -180,59 +191,91 @@
     <div class="stars-2"></div>
   </div>
 
+  <!-- shared status-bar glyphs: cellular, wifi, battery -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="status-icons" viewBox="0 0 64 14">
+      <rect x="0"    y="8.5" width="3.2" height="4"    rx="1" fill="#fff"/>
+      <rect x="4.8"  y="6.5" width="3.2" height="6"    rx="1" fill="#fff"/>
+      <rect x="9.6"  y="4"   width="3.2" height="8.5"  rx="1" fill="#fff"/>
+      <rect x="14.4" y="1.5" width="3.2" height="11"   rx="1" fill="#fff"/>
+      <path d="M21.8 7.3a8 8 0 0 1 12 0" stroke="#fff" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+      <path d="M24.7 10.1a4.4 4.4 0 0 1 6.2 0" stroke="#fff" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+      <circle cx="27.8" cy="12.4" r="1.6" fill="#fff"/>
+      <rect x="38.8" y="1.75" width="21.5" height="10.5" rx="3.2" stroke="#fff" stroke-opacity=".4" stroke-width="1.2" fill="none"/>
+      <rect x="40.7" y="3.6" width="17.7" height="6.8" rx="1.8" fill="#fff"/>
+      <path d="M61.6 5.2v3.6a1.9 1.9 0 0 0 0-3.6Z" fill="#fff" fill-opacity=".4"/>
+    </symbol>
+  </svg>
+
   <main class="stage">
-    <!-- Happy: dancing cat, burning fire -->
-    <div class="phone">
-      <div class="frame">
-        <div class="screen happy">
-          <div class="hero"></div>
-          <img class="cat"  src="assets/cat-happy.svg"  alt="Котик танцует у горящего костра">
-          <img class="fire" src="assets/fire-happy.svg" alt="">
-          <div class="card"></div>
-          <div class="status" aria-hidden="true">
-            <span>9:41</span>
-            <svg viewBox="0 0 77 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="8" width="3" height="4" rx="1" fill="#fff"/>
-              <rect x="5" y="6" width="3" height="6" rx="1" fill="#fff"/>
-              <rect x="10" y="3.5" width="3" height="8.5" rx="1" fill="#fff"/>
-              <rect x="15" y="1" width="3" height="11" rx="1" fill="#fff"/>
-              <path d="M31.5 4.6a8.8 8.8 0 0 0-11.4 0l1.6 1.9a6.3 6.3 0 0 1 8.2 0l1.6-1.9Z" fill="#fff"/>
-              <path d="M29 7.6a5 5 0 0 0-6.4 0l1.7 2a2.5 2.5 0 0 1 3 0l1.7-2Z" fill="#fff"/>
-              <circle cx="25.8" cy="10.8" r="1.4" fill="#fff"/>
-              <rect x="49" y="1.5" width="24" height="10" rx="3" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>
-              <rect x="51" y="3.5" width="17" height="6" rx="1.5" fill="#fff"/>
-              <path d="M74.5 5v3a2 2 0 0 0 0-3Z" fill="#fff" fill-opacity=".5"/>
-            </svg>
+    <div class="row">
+      <!-- Happy: dancing cat, burning fire -->
+      <div class="phone">
+        <div class="frame">
+          <div class="screen happy">
+            <div class="hero"></div>
+            <img class="cat"  src="assets/cat-happy.svg"  alt="Котик танцует у горящего костра">
+            <img class="fire" src="assets/fire-happy.svg" alt="">
+            <div class="card"></div>
+            <div class="status" aria-hidden="true">
+              <span>9:41</span>
+              <svg viewBox="0 0 64 14"><use href="#status-icons"/></svg>
+            </div>
+            <div class="island"></div>
           </div>
-          <div class="island"></div>
+        </div>
+      </div>
+
+      <!-- Sad: shivering cat, extinguished fire -->
+      <div class="phone">
+        <div class="frame">
+          <div class="screen sad">
+            <div class="hero"></div>
+            <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
+            <img class="fire" src="assets/fire-sad.svg" alt="">
+            <div class="card"></div>
+            <div class="status" aria-hidden="true">
+              <span>9:41</span>
+              <svg viewBox="0 0 64 14"><use href="#status-icons"/></svg>
+            </div>
+            <div class="island"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Sad: shivering cat, extinguished fire -->
-    <div class="phone">
-      <div class="frame">
-        <div class="screen sad">
-          <div class="hero"></div>
-          <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
-          <img class="fire" src="assets/fire-sad.svg" alt="">
-          <div class="card"></div>
-          <div class="status" aria-hidden="true">
-            <span>9:41</span>
-            <svg viewBox="0 0 77 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="8" width="3" height="4" rx="1" fill="#fff"/>
-              <rect x="5" y="6" width="3" height="6" rx="1" fill="#fff"/>
-              <rect x="10" y="3.5" width="3" height="8.5" rx="1" fill="#fff"/>
-              <rect x="15" y="1" width="3" height="11" rx="1" fill="#fff"/>
-              <path d="M31.5 4.6a8.8 8.8 0 0 0-11.4 0l1.6 1.9a6.3 6.3 0 0 1 8.2 0l1.6-1.9Z" fill="#fff"/>
-              <path d="M29 7.6a5 5 0 0 0-6.4 0l1.7 2a2.5 2.5 0 0 1 3 0l1.7-2Z" fill="#fff"/>
-              <circle cx="25.8" cy="10.8" r="1.4" fill="#fff"/>
-              <rect x="49" y="1.5" width="24" height="10" rx="3" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>
-              <rect x="51" y="3.5" width="17" height="6" rx="1.5" fill="#fff"/>
-              <path d="M74.5 5v3a2 2 0 0 0 0-3Z" fill="#fff" fill-opacity=".5"/>
-            </svg>
+    <div class="row">
+      <!-- Happy, compact scene -->
+      <div class="phone">
+        <div class="frame">
+          <div class="screen happy compact">
+            <div class="hero"></div>
+            <img class="cat"  src="assets/cat-happy.svg"  alt="Котик танцует у горящего костра (уменьшенная сцена)">
+            <img class="fire" src="assets/fire-happy.svg" alt="">
+            <div class="card"></div>
+            <div class="status" aria-hidden="true">
+              <span>9:41</span>
+              <svg viewBox="0 0 64 14"><use href="#status-icons"/></svg>
+            </div>
+            <div class="island"></div>
           </div>
-          <div class="island"></div>
+        </div>
+      </div>
+
+      <!-- Sad, compact scene -->
+      <div class="phone">
+        <div class="frame">
+          <div class="screen sad compact">
+            <div class="hero"></div>
+            <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра (уменьшенная сцена)">
+            <img class="fire" src="assets/fire-sad.svg" alt="">
+            <div class="card"></div>
+            <div class="status" aria-hidden="true">
+              <span>9:41</span>
+              <svg viewBox="0 0 64 14"><use href="#status-icons"/></svg>
+            </div>
+            <div class="island"></div>
+          </div>
         </div>
       </div>
     </div>
