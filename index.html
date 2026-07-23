@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Introvert Test</title>
+  <style>
+    :root {
+      --bg-top: #0d142e;
+      --bg-mid: #16204a;
+      --bg-bottom: #232f5e;
+      --glow: #ffdb3c;
+      --star: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100svh;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Контейнер под будущий «экран телефона» */
+    .screen {
+      position: relative;
+      width: min(420px, 100vw);
+      min-height: 100svh;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Тёплое пятно света от костра */
+    .screen::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 380px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(50% 50% at 50% 50%, rgba(255, 219, 60, .14), transparent 70%);
+      pointer-events: none;
+      animation: campfire-glow 1.4s ease-in-out infinite alternate;
+    }
+
+    /* Звёзды: два слоя, мерцают в разном ритме */
+    .stars, .stars-2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: var(--star);
+      pointer-events: none;
+    }
+
+    .stars {
+      box-shadow:
+        38px 54px 0 0 var(--star),
+        96px 30px 0 0 rgba(255, 255, 255, .75),
+        150px 78px 0 0 var(--star),
+        210px 40px 0 0 rgba(255, 255, 255, .6),
+        268px 92px 0 0 var(--star),
+        330px 48px 0 0 rgba(255, 255, 255, .8),
+        382px 110px 0 0 rgba(255, 255, 255, .65),
+        60px 150px 0 0 rgba(255, 255, 255, .55),
+        300px 170px 0 0 rgba(255, 255, 255, .5),
+        190px 130px 0 0 rgba(255, 255, 255, .7);
+      animation: twinkle 3.2s ease-in-out infinite alternate;
+    }
+
+    .stars-2 {
+      width: 1.5px;
+      height: 1.5px;
+      box-shadow:
+        70px 90px 0 0 rgba(255, 255, 255, .6),
+        130px 44px 0 0 rgba(255, 255, 255, .5),
+        176px 104px 0 0 rgba(255, 255, 255, .65),
+        240px 66px 0 0 rgba(255, 255, 255, .5),
+        356px 76px 0 0 rgba(255, 255, 255, .55),
+        26px 116px 0 0 rgba(255, 255, 255, .45),
+        402px 150px 0 0 rgba(255, 255, 255, .5),
+        110px 176px 0 0 rgba(255, 255, 255, .4);
+      animation: twinkle 2.4s ease-in-out .8s infinite alternate;
+    }
+
+    .scene {
+      display: block;
+      width: min(330px, 84%);
+      height: auto;
+      position: relative;
+    }
+
+    @keyframes twinkle {
+      from { opacity: .3; }
+      to   { opacity: .95; }
+    }
+
+    @keyframes campfire-glow {
+      from { opacity: .75; }
+      to   { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="screen">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="stars-2" aria-hidden="true"></div>
+    <img class="scene" src="assets/campfire-cat.svg" alt="Котик танцует у костра">
+  </main>
+</body>
+</html>
