@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Introvert Test — градиенты</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100svh; }
+    body {
+      background: linear-gradient(180deg, #0d142e 0%, #16204a 55%, #232f5e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5vmin 3vw;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(18px, 3vw, 40px);
+      justify-content: center;
+    }
+    .cell { text-align: center; }
+    .label {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 12px;
+      opacity: .85;
+    }
+    .label small { opacity: .6; display: block; margin-top: 2px; }
+
+    .phone { width: min(230px, 42vw); container-type: inline-size; }
+    .frame {
+      padding: 2.6cqw;
+      border-radius: 16.4cqw;
+      background: #0c0c10;
+      box-shadow: inset 0 0 0 0.45cqw rgba(255,255,255,.12), 0 20px 45px rgba(0,0,0,.5);
+    }
+    .screen {
+      position: relative;
+      aspect-ratio: 440 / 956;
+      background: #f5f6f6;
+      border-radius: 13.8cqw;
+      overflow: hidden;
+    }
+    .hero { position: absolute; inset: 0 0 auto 0; height: 45.29%; background: var(--g); }
+    .cat, .fire { position: absolute; display: block; }
+    .cat  { left: 7%; top: 11.8%; width: 53.6%; }
+    .fire { left: 57.5%; top: 17.2%; width: 35.7%; }
+    .card {
+      position: absolute;
+      left: 3.64%; top: 38.08%; width: 92.73%; height: 19.14%;
+      background: #fff; border-radius: 5.2cqw;
+      box-shadow: 0 1px 4px rgba(12,12,13,.05);
+    }
+    .island {
+      position: absolute; top: 2.6cqw; left: 50%; transform: translateX(-50%);
+      width: 27cqw; height: 8cqw; background: #000; border-radius: 4.5cqw; z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid" id="grid"></div>
+
+  <template id="cell">
+    <div class="cell">
+      <div class="phone">
+        <div class="frame">
+          <div class="screen">
+            <div class="hero"></div>
+            <img class="cat" src="assets/cat-happy.svg" alt="">
+            <img class="fire" src="assets/fire-happy.svg" alt="">
+            <div class="card"></div>
+            <div class="island"></div>
+          </div>
+        </div>
+      </div>
+      <div class="label"></div>
+    </div>
+  </template>
+
+  <script>
+    const variants = [
+      ["V1 — исходный",        "#180DA9", "#5B52FF"],
+      ["V2 — виноград",        "#3B0764", "#8B5CF6"],
+      ["V3 — индиго-ночь",     "#0D1440", "#4053D8"],
+      ["V4 — ультрамарин-неон","#1E40AF", "#22D3EE"],
+      ["V5 — закат",           "#4C1D95", "#EC4899"],
+      ["V6 — бирюза",          "#0E4C63", "#2DD4BF"],
+    ];
+    const grid = document.getElementById("grid");
+    const tpl = document.getElementById("cell");
+    for (const [name, from, to] of variants) {
+      const cell = tpl.content.cloneNode(true);
+      cell.querySelector(".screen").style.setProperty(
+        "--g", `linear-gradient(-21.06deg, ${from} 17.83%, ${to} 75.64%)`
+      );
+      cell.querySelector(".label").innerHTML =
+        `${name}<small>${from} → ${to}</small>`;
+      grid.appendChild(cell);
+    }
+  </script>
+</body>
+</html>
