@@ -126,13 +126,13 @@
       left: 3.64%;
       top: 38.08%;
       width: 92.73%;
-      height: 19.98%;
+      height: 18.2%;
       background: #fff;
       border-radius: 6.9cqw;
       box-shadow: 0 1px 4px rgba(12, 12, 13, .05);
       padding: 3.4cqw 3.4cqw 0;
       font-family: 'Onest', system-ui, sans-serif;
-      color: #000;
+      color: #282828;
     }
     .card .date {
       font-size: 3.45cqw;
@@ -146,24 +146,56 @@
       line-height: 1.18;
       letter-spacing: .005em;
     }
-    .card .title .hl { color: #3D5400; }
     .card .caption {
       margin: 2.4cqw 0 0;
       font-size: 3cqw;
       font-weight: 400;
       letter-spacing: -.057em;
     }
-    .card .badge {
-      width: 6.5cqw;
-      height: 6.5cqw;
-      border-radius: 1.7cqw;
-      background: #C8FF1D;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2.4cqw;
+
+    /* ---- skill progress bar (Гормонизатор) ---- */
+    .skill { position: relative; margin-top: 2.4cqw; }
+    .skill-track {
+      height: 3.45cqw;
+      border-radius: 1.72cqw;
+      background: rgba(200, 255, 29, .4);
     }
-    .card .badge img { width: 5.2cqw; display: block; }
+    .skill-fill {
+      position: relative;
+      height: 100%;
+      width: 26%; /* стартовая ширина, вырастет до 31.4% (+5) */
+      border-radius: inherit;
+      background: #3D5400;
+      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards;
+    }
+    .skill-lotus {
+      position: absolute;
+      left: calc(100% - .65cqw);
+      top: -.85cqw;
+      width: 6.47cqw;
+      animation: lotus-pop .45s ease 1.5s;
+    }
+    .plus5 {
+      position: absolute;
+      left: 25cqw;
+      top: -3.4cqw;
+      font-size: 2.8cqw;
+      font-weight: 700;
+      color: #3D5400;
+      opacity: 0;
+      transform: translate(10cqw, -8cqw) rotate(-15deg) scale(.8);
+      animation:
+        plus-fly .7s cubic-bezier(.22, .9, .36, 1) .8s forwards,
+        plus-fade .4s ease 1.9s forwards;
+    }
+    @keyframes skill-grow { to { width: 31.4%; } }
+    @keyframes lotus-pop { 40% { transform: scale(1.25); } }
+    @keyframes plus-fly {
+      to { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(1); }
+    }
+    @keyframes plus-fade {
+      to { opacity: 0; transform: translate(-1cqw, 1.5cqw) rotate(-15deg) scale(.6); }
+    }
 
     /* ---- story progress + close (green screen) ---- */
     .progress {
@@ -253,6 +285,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
+      .skill-fill { width: 31.4%; } /* сразу финальное состояние */
     }
   </style>
 </head>
@@ -295,9 +328,14 @@
             <img class="fire" src="assets/fire-happy.svg" alt="">
             <div class="card">
               <div class="date">14-20 июля</div>
-              <p class="title">Благодаря тебе во мне подрос <span class="hl">Гормонизатор!</span></p>
+              <p class="title">Благодаря тебе во мне подрос Гормонизатор!</p>
               <p class="caption">Ты чаще всего смотрел про осознанность</p>
-              <div class="badge"><img src="assets/icon-lotus.svg" alt=""></div>
+              <div class="skill">
+                <div class="skill-track">
+                  <div class="skill-fill"><img class="skill-lotus" src="assets/icon-hormonizer.svg" alt=""></div>
+                </div>
+                <span class="plus5">+5</span>
+              </div>
             </div>
             <div class="status" aria-hidden="true">
               <span>9:41</span>
