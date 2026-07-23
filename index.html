@@ -302,9 +302,6 @@
       height: 8.6cqw;
       z-index: 4;
     }
-    /* без прогресс-бара крестик поднимается выше */
-    .screen.sad .close { top: 16cqw; }
-
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
@@ -386,6 +383,7 @@
         <div class="frame">
           <div class="screen sad">
             <div class="hero"></div>
+            <div class="progress" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
             <img class="close" src="assets/icon-close.svg" alt="">
             <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
             <img class="fire" src="assets/fire-sad.svg" alt="">
