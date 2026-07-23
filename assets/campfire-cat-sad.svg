@@ -5,19 +5,19 @@
   .cat        { transform-origin: 103px 176px;   animation: cat-sad 3.6s ease-in-out infinite; }
   .shiver     { animation: shiver 4s linear infinite; }
   .shadow     { transform-origin: 46.5px 164px;  animation: shadow-sad 3.6s ease-in-out infinite; }
-  .arm-left   { transform-origin: 66px 112px;    animation: arm-left-hug 3.6s ease-in-out infinite; }
-  .arm-right  { transform-origin: 152px 110px;   animation: arm-right-hug 3.6s ease-in-out infinite; }
-  .ear-left   { transform-origin: 72px 86px;     animation: ear-left-droop 3.6s ease-in-out infinite; }
-  .ear-right  { transform-origin: 137px 80px;    animation: ear-right-droop 3.6s ease-in-out infinite; }
-  .face       { transform-origin: 106px 96px;    animation: face-sad 3.6s ease-in-out .1s infinite; }
+  .arm-left   { transform-origin: 66px 112px;    animation: arm-left-hug 4s ease-in-out infinite; }
+  .arm-right  { transform-origin: 152px 110px;   animation: arm-right-hug 4s ease-in-out infinite; }
+  .ear-left   { transform-origin: 72px 86px;     animation: ear-left-droop 4s ease-in-out infinite; }
+  .ear-right  { transform-origin: 137px 80px;    animation: ear-right-droop 4s ease-in-out infinite; }
+  .face       { transform-origin: 106px 96px;    animation: face-sad 4s ease-in-out infinite; }
   .mouth      { transform-origin: 108.5px 109px; animation: mouth-quiver 4s linear infinite; }
   .eye-r      { transform-origin: 125.6px 92px;  animation: blink-sad 5s linear infinite; }
   .eye-l      { transform-origin: 93px 92px;     animation: blink-sad 5s linear infinite; }
   .ball       { animation: ball-drift 4.5s ease-in-out infinite alternate; }
   .ember      { transform-origin: 238px 158px;   animation: ember-glow 2.8s ease-in-out infinite alternate; }
-  .smoke      { animation: smoke-rise 5s linear infinite; }
-  .smoke-2    { animation-name: smoke-rise-b; animation-delay: -1.7s; animation-duration: 5.6s; }
-  .smoke-3    { animation-delay: -3.4s; animation-duration: 4.6s; }
+  .spark      { animation: spark-fly 4.2s linear infinite; }
+  .spark-2    { animation-name: spark-fly-b; animation-delay: -1.6s; animation-duration: 4.8s; }
+  .spark-3    { animation-delay: -3.1s; animation-duration: 3.8s; }
 
   @keyframes cat-sad {
     0%, 100% { transform: translateY(0) rotate(-1deg); }
@@ -41,24 +41,34 @@
     50%      { transform: scale(.985, .97); }
   }
   @keyframes arm-left-hug {
-    0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(2.5deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25%      { transform: translateY(0) rotate(1.5deg); }
+    54%, 80% { transform: translateY(-1.5px) rotate(-7deg); }
+    90%      { transform: translateY(0) rotate(-1deg); }
   }
   @keyframes arm-right-hug {
-    0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(-2.5deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25%      { transform: translateY(0) rotate(-1.5deg); }
+    54%, 80% { transform: translateY(-1.5px) rotate(7deg); }
+    90%      { transform: translateY(0) rotate(1deg); }
   }
   @keyframes ear-left-droop {
-    0%, 100% { transform: rotate(-2deg); }
-    50%      { transform: rotate(1deg); }
+    0%, 100% { transform: rotate(-1.5deg); }
+    25%      { transform: rotate(.5deg); }
+    54%, 80% { transform: rotate(-4deg); }
+    90%      { transform: rotate(-1deg); }
   }
   @keyframes ear-right-droop {
-    0%, 100% { transform: rotate(2deg); }
-    50%      { transform: rotate(-1deg); }
+    0%, 100% { transform: rotate(1.5deg); }
+    25%      { transform: rotate(-.5deg); }
+    54%, 80% { transform: rotate(4deg); }
+    90%      { transform: rotate(1deg); }
   }
   @keyframes face-sad {
     0%, 100% { transform: translate(0, 0); }
-    50%      { transform: translate(0, .8px); }
+    25%      { transform: translate(0, .6px); }
+    54%, 80% { transform: translate(0, 1.8px); }
+    90%      { transform: translate(0, .4px); }
   }
   @keyframes mouth-quiver {
     0%, 58%, 82%, 100% { transform: scale(1, 1); }
@@ -85,17 +95,23 @@
     from { opacity: .04; transform: scale(1); }
     to   { opacity: .12; transform: scale(1.06); }
   }
-  @keyframes smoke-rise {
-    0%   { transform: translate(0, 0) scale(.6); opacity: 0; }
-    10%  { opacity: .3; }
-    60%  { opacity: .22; }
-    100% { transform: translate(9px, -55px) scale(1.4); opacity: 0; }
+  @keyframes spark-fly {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    8%   { opacity: .9; }
+    25%  { transform: translate(5px, -30px); opacity: .55; }
+    45%  { transform: translate(-2px, -58px); opacity: .8; }
+    65%  { transform: translate(6px, -85px); opacity: .4; }
+    85%  { transform: translate(10px, -108px); opacity: .6; }
+    100% { transform: translate(12px, -122px); opacity: 0; }
   }
-  @keyframes smoke-rise-b {
-    0%   { transform: translate(0, 0) scale(.6); opacity: 0; }
-    10%  { opacity: .28; }
-    60%  { opacity: .2; }
-    100% { transform: translate(-8px, -50px) scale(1.5); opacity: 0; }
+  @keyframes spark-fly-b {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    8%   { opacity: .85; }
+    25%  { transform: translate(-4px, -28px); opacity: .5; }
+    45%  { transform: translate(3px, -55px); opacity: .75; }
+    65%  { transform: translate(-6px, -82px); opacity: .35; }
+    85%  { transform: translate(-9px, -105px); opacity: .55; }
+    100% { transform: translate(-11px, -118px); opacity: 0; }
   }
 </style>
 <g class="shadow">
@@ -206,7 +222,7 @@
 <path d="M209.377 145.786C208.42 144.589 209.616 142.436 211.291 141.718C213.206 141 217.273 143.393 220.384 144.35C223.495 145.307 231.631 145.786 234.981 146.264C238.331 146.743 247.184 149.375 251.013 150.571C254.841 151.768 259.627 149.853 260.106 152.007C260.584 154.161 258.431 154.4 255.559 154.4C252.688 154.4 250.056 152.725 249.098 153.682C248.141 154.639 250.534 157.989 248.381 158.228C246.227 158.468 245.27 153.921 244.552 152.725C243.834 151.528 242.877 151.05 236.895 149.853C230.913 148.657 230.434 148.896 222.298 148.896C214.163 148.896 210.334 146.982 209.377 145.786Z" fill="#808080"/>
 <path d="M213.445 157.989C214.801 157.909 217.656 157.463 218.23 156.314M211.291 143.153C212.567 144.19 216.077 146.264 219.905 146.264C223.734 146.264 227.562 147.062 228.998 147.46M234.262 149.375C237.373 149.614 243.595 151.05 245.03 153.682M241.92 147.7C245.668 149.215 253.166 151.05 256.277 151.05" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/>
 <ellipse class="ember" cx="238" cy="158" rx="26" ry="10" fill="#E6A500" opacity="0.06"/>
-<circle class="smoke smoke-1" cx="236" cy="150" r="4" fill="#808080" opacity="0"/>
-<circle class="smoke smoke-2" cx="243" cy="146" r="3" fill="#808080" opacity="0"/>
-<circle class="smoke smoke-3" cx="239" cy="153" r="4.5" fill="#808080" opacity="0"/>
+<circle class="spark spark-1" cx="236" cy="148" r="1.8" fill="#FFDB3C" opacity="0"/>
+<circle class="spark spark-2" cx="243" cy="145" r="1.5" fill="#E6A500" opacity="0"/>
+<circle class="spark spark-3" cx="239" cy="151" r="1.6" fill="#FFDB3C" opacity="0"/>
 </svg>
