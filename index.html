@@ -10,12 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-top: #0d142e;
-      --bg-mid: #16204a;
-      --bg-bottom: #232f5e;
-      --hero-green: linear-gradient(161.79deg, #88BD00 24.52%, #597B00 76.38%);
-      --hero-blue: linear-gradient(-21.06deg, #180DA9 17.83%, #5B52FF 75.64%);
+      --case-sky-top: #BDE4FD;
+      --case-sky-bottom: #9CCEF2;
+      --hero-green: linear-gradient(152.54deg, #88BD00 24.52%, #597B00 76.38%);
       --screen-bg: #f5f6f6;
+      --ink: #282828;
     }
 
     * { box-sizing: border-box; }
@@ -23,67 +22,36 @@
     html, body { margin: 0; padding: 0; min-height: 100svh; }
 
     body {
-      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6vmin 4vw;
+      background: #fff;
       font-family: system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
 
-    /* ---- night sky ---- */
-    .sky {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-    .stars, .stars-2 {
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px; height: 2px;
-      border-radius: 50%;
-      background: #fff;
-    }
-    .stars {
-      box-shadow:
-        8vw 12vh 0 0 #fff, 22vw 6vh 0 0 rgba(255,255,255,.7), 34vw 18vh 0 0 #fff,
-        47vw 8vh 0 0 rgba(255,255,255,.6), 61vw 14vh 0 0 #fff, 74vw 5vh 0 0 rgba(255,255,255,.8),
-        88vw 16vh 0 0 rgba(255,255,255,.65), 15vw 82vh 0 0 rgba(255,255,255,.5),
-        52vw 90vh 0 0 rgba(255,255,255,.6), 83vw 86vh 0 0 rgba(255,255,255,.55),
-        5vw 45vh 0 0 rgba(255,255,255,.4), 94vw 55vh 0 0 rgba(255,255,255,.45);
-      animation: twinkle 3.2s ease-in-out infinite alternate;
-    }
-    .stars-2 {
-      width: 1.5px; height: 1.5px;
-      box-shadow:
-        13vw 25vh 0 0 rgba(255,255,255,.6), 28vw 10vh 0 0 rgba(255,255,255,.5),
-        42vw 22vh 0 0 rgba(255,255,255,.55), 57vw 4vh 0 0 rgba(255,255,255,.5),
-        68vw 20vh 0 0 rgba(255,255,255,.6), 81vw 9vh 0 0 rgba(255,255,255,.45),
-        93vw 28vh 0 0 rgba(255,255,255,.5), 8vw 65vh 0 0 rgba(255,255,255,.4),
-        37vw 88vh 0 0 rgba(255,255,255,.45), 70vw 92vh 0 0 rgba(255,255,255,.4);
-      animation: twinkle 2.4s ease-in-out .8s infinite alternate;
-    }
-
-    /* ---- layout ---- */
+    /* ---- layout: two cases on sky backers ---- */
     .stage {
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: clamp(28px, 6vh, 64px);
+      gap: 10px;                     /* ритм сетки кейсов портфолио */
       align-items: center;
+      padding: 40px 3vw;
     }
-    .row {
+    .case {
+      /* размеры как у project-card__stage в портфолио: ~790×510, radius 24 */
+      background: linear-gradient(180deg, var(--case-sky-top), var(--case-sky-bottom));
+      width: min(790px, 94vw);
+      height: 510px;
+      border-radius: 24px;
+      padding: 20px;
       display: flex;
-      flex-wrap: wrap;
-      gap: clamp(24px, 6vw, 72px);
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
     /* ---- iPhone mockup ---- */
     .phone {
-      width: min(340px, 86vw);
+      width: min(216px, 60vw);
       container-type: inline-size;
     }
     .frame {
@@ -92,7 +60,7 @@
       background: #0c0c10;
       box-shadow:
         inset 0 0 0 0.45cqw rgba(255, 255, 255, .12),
-        0 30px 70px rgba(0, 0, 0, .55);
+        0 30px 70px rgba(13, 40, 66, .45);
     }
     .screen {
       position: relative;
@@ -100,39 +68,40 @@
       background: var(--screen-bg);
       border-radius: 13.8cqw;
       overflow: hidden;
+      font-family: 'Onest', system-ui, sans-serif;
     }
 
     .hero {
       position: absolute;
       inset: 0 0 auto 0;
-      height: 45.29%;
+      height: 71.55%;
+      border-radius: 0 0 8.62cqw 8.62cqw;
+      background: var(--hero-green);
     }
-    .screen.happy .hero { background: var(--hero-green); }
-    .screen.sad .hero   { background: var(--hero-green); }
 
     .cat, .fire {
       position: absolute;
       display: block;
     }
 
-    /* medium scene placement, with a gap between cat and fire */
-    .screen.happy .cat  { left: 7%; top: 8.3%; width: 53.6%; }
-    .screen.happy .fire { left: 49.45%; top: 17.2%; width: 35.7%; }
-    .screen.sad .cat    { left: 3.5%; top: 8.4%; width: 57%; }
-    .screen.sad .fire   { left: 50.95%; top: 14.9%; width: 35.3%; }
+    /* scene placement (design 2049:2923) */
+    .screen.happy .cat  { left: 7%; top: 22%; width: 53.6%; }
+    .screen.happy .fire { left: 49.45%; top: 30.9%; width: 35.7%; }
+    .screen.sad .cat    { left: 3.5%; top: 22.1%; width: 57%; }
+    .screen.sad .fire   { left: 50.95%; top: 28.6%; width: 35.3%; }
 
+    /* ---- result card ---- */
     .card {
       position: absolute;
       left: 3.64%;
-      top: 38.08%;
+      top: 51.67%;
       width: 92.73%;
       height: 18.2%;
       background: #fff;
       border-radius: 6.9cqw;
-      box-shadow: 0 1px 4px rgba(12, 12, 13, .05);
-      padding: 3.4cqw 3.4cqw 0;
-      font-family: 'Onest', system-ui, sans-serif;
-      color: #282828;
+      box-shadow: 0 1px 2px rgba(12, 12, 13, .05);
+      padding: 3.4cqw 3.4cqw 3cqw;
+      color: var(--ink);
     }
     .card .date {
       font-size: 3.45cqw;
@@ -140,42 +109,52 @@
       letter-spacing: -.05em;
     }
     .card .title {
-      margin: 1cqw 0 0;
+      margin: 1.1cqw 0 0;
       font-size: 4.74cqw;
       font-weight: 700;
       line-height: 1.18;
       letter-spacing: .005em;
     }
     .card .caption {
-      margin: 2.4cqw 0 0;
+      margin: 1.1cqw 0 0;
       font-size: 3cqw;
       font-weight: 400;
       letter-spacing: -.057em;
     }
 
-    /* ---- skill progress bar (Гормонизатор) ---- */
-    .skill { position: relative; margin-top: 2.4cqw; }
+    /* ---- skill progress bar (Гармонизатор) ---- */
+    .skill { position: relative; margin-top: 4.5cqw; }
     .skill-track {
-      height: 3.45cqw;
+      height: 3.88cqw;
       border-radius: 1.72cqw;
-      background: rgba(200, 255, 29, .4);
+      background: #EEE;
     }
     .skill-fill {
       position: relative;
       height: 100%;
-      width: 26%; /* стартовая ширина, вырастет до 31.4% (+5) */
+      width: 25.5%; /* стартовая ширина, вырастет до 30.85% (+7) */
       border-radius: inherit;
-      background: #3D5400;
+      background: #5A7C01;
       animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards;
+    }
+    .skill-num {
+      position: absolute;
+      right: 5cqw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.59cqw;
+      color: #fff;
+      opacity: 0;
+      animation: num-in .3s ease 1.7s forwards;
     }
     .skill-lotus {
       position: absolute;
-      left: calc(100% - .65cqw);
-      top: -.85cqw;
-      width: 6.47cqw;
+      left: calc(100% - 3.77cqw); /* центр цветка на кончике заливки */
+      top: -1.5cqw;
+      width: 7.54cqw;
       animation: lotus-pop .45s ease 1.5s;
     }
-    .plus5 {
+    .plus-fly {
       position: absolute;
       left: 25cqw;
       top: -3.4cqw;
@@ -185,58 +164,56 @@
       opacity: 0;
       transform: translate(10cqw, -8cqw) rotate(-15deg) scale(.8);
       animation:
-        plus-fly .7s cubic-bezier(.22, .9, .36, 1) .8s forwards,
+        plus-fly-in .7s cubic-bezier(.22, .9, .36, 1) .8s forwards,
         plus-fade .4s ease 1.9s forwards;
     }
-    @keyframes skill-grow { to { width: 31.4%; } }
+    @keyframes skill-grow { to { width: 30.85%; } }
+    @keyframes num-in { to { opacity: 1; } }
     @keyframes lotus-pop { 40% { transform: scale(1.25); } }
-    @keyframes plus-fly {
+    @keyframes plus-fly-in {
       to { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(1); }
     }
     @keyframes plus-fade {
       to { opacity: 0; transform: translate(-1cqw, 1.5cqw) rotate(-15deg) scale(.6); }
     }
 
-    /* ---- story progress + close (green screen) ---- */
-    .progress {
+    /* ---- other discoveries ---- */
+    .others {
       position: absolute;
-      top: 16cqw; /* 74px макета: контейнер top 62 + py 12 */
-      left: 0;
-      right: 0;
-      z-index: 4;
+      top: 74.06%;
+      left: 3.45cqw;
+      font-size: 3.45cqw;
+      font-weight: 600;
+      letter-spacing: -.05em;
+      color: var(--ink);
+    }
+    .chips {
+      position: absolute;
+      top: 77.4%;
+      left: 3.45cqw;
       display: flex;
-      gap: 1.7cqw;
-      padding: 0 3.45cqw;
+      gap: 1.72cqw;
     }
-    .progress span {
-      flex: 1;
-      height: .9cqw;
-      border-radius: .45cqw;
-      background: rgba(255, 255, 255, .4);
-      position: relative;
-    }
-    .progress .active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 51%;
-      border-radius: inherit;
+    .chip {
       background: #fff;
+      border-radius: 5.17cqw;
+      padding: 3cqw 3.45cqw;
+      display: flex;
+      flex-direction: column;
+      gap: 1.72cqw;
+      box-shadow: 0 1px 2px rgba(12, 12, 13, .05);
+      color: var(--ink);
     }
-    .close {
-      position: absolute;
-      top: 20.3cqw;
-      right: 3.45cqw;
-      width: 8.6cqw;
-      height: 8.6cqw;
-      z-index: 4;
+    .chip img { width: 5.17cqw; height: 5.17cqw; display: block; }
+    .chip .row {
+      display: flex;
+      gap: .86cqw;
+      font-size: 3.45cqw;
+      letter-spacing: -.05em;
+      white-space: nowrap;
     }
-    /* без прогресс-бара крестик поднимается выше */
-    .screen.sad .close { top: 16cqw; }
 
-    /* ---- Dynamic Island + status bar ---- */
+    /* ---- Dynamic Island + status bar + home ---- */
     .island {
       position: absolute;
       top: 2.6cqw;
@@ -277,24 +254,65 @@
       font-variant-numeric: tabular-nums;
     }
     .status svg { width: 16.7cqw; height: auto; display: block; }
-
-    @keyframes twinkle {
-      from { opacity: .3; }
-      to   { opacity: .95; }
+    .home {
+      position: absolute;
+      bottom: 1.72cqw;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 31cqw;
+      height: 1.08cqw;
+      border-radius: 99cqw;
+      background: #000;
+      z-index: 6;
     }
+
+    /* ---- story progress + close ---- */
+    .progress {
+      position: absolute;
+      top: 16cqw; /* 74px макета: контейнер top 62 + py 12 */
+      left: 0;
+      right: 0;
+      z-index: 4;
+      display: flex;
+      gap: 1.7cqw;
+      padding: 0 3.45cqw;
+    }
+    .progress span {
+      flex: 1;
+      height: .9cqw;
+      border-radius: .45cqw;
+      background: rgba(255, 255, 255, .4);
+      position: relative;
+    }
+    .progress .active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 51%;
+      border-radius: inherit;
+      background: #fff;
+    }
+    .close {
+      position: absolute;
+      top: 20.3cqw;
+      right: 3.45cqw;
+      width: 8.6cqw;
+      height: 8.6cqw;
+      z-index: 4;
+    }
+    /* без прогресс-бара крестик поднимается выше */
+    .screen.sad .close { top: 16cqw; }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
-      .skill-fill { width: 31.4%; } /* сразу финальное состояние */
+      .skill-fill { width: 30.85%; } /* сразу финальное состояние */
+      .skill-num { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="sky" aria-hidden="true">
-    <div class="stars"></div>
-    <div class="stars-2"></div>
-  </div>
-
   <!-- shared status-bar glyphs: cellular, wifi, battery -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="status-icons" viewBox="0 0 77.7 13">
@@ -316,8 +334,8 @@
   </svg>
 
   <main class="stage">
-    <div class="row">
-      <!-- Happy: dancing cat, burning fire -->
+    <!-- Case 1: happy result -->
+    <section class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen happy">
@@ -328,13 +346,27 @@
             <img class="fire" src="assets/fire-happy.svg" alt="">
             <div class="card">
               <div class="date">14-20 июля</div>
-              <p class="title">Благодаря тебе во мне подрос Гормонизатор!</p>
+              <p class="title">Благодаря тебе во мне <br>вырос Гармонизатор</p>
               <p class="caption">Ты чаще всего смотрел про осознанность</p>
               <div class="skill">
                 <div class="skill-track">
-                  <div class="skill-fill"><img class="skill-lotus" src="assets/icon-hormonizer.svg" alt=""></div>
+                  <div class="skill-fill">
+                    <span class="skill-num">+7</span>
+                    <img class="skill-lotus" src="assets/icon-hormonizer.svg" alt="">
+                  </div>
                 </div>
-                <span class="plus5">+5</span>
+                <span class="plus-fly">+7</span>
+              </div>
+            </div>
+            <div class="others">Другие открытия недели</div>
+            <div class="chips">
+              <div class="chip">
+                <img src="assets/icon-lifehacker.png" alt="">
+                <div class="row"><span>+1</span><span>Лайфхакер</span></div>
+              </div>
+              <div class="chip">
+                <img src="assets/icon-intuit.png" alt="">
+                <div class="row"><span>+2</span><span>Интуит</span></div>
               </div>
             </div>
             <div class="status" aria-hidden="true">
@@ -342,11 +374,14 @@
               <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
             </div>
             <div class="island"></div>
+            <div class="home" aria-hidden="true"></div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Sad: shivering cat, extinguished fire -->
+    <!-- Case 2: sad result -->
+    <section class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen sad">
@@ -360,10 +395,11 @@
               <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
             </div>
             <div class="island"></div>
+            <div class="home" aria-hidden="true"></div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 </body>
 </html>
