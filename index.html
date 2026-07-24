@@ -642,6 +642,9 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
+      /* подложка: во время перехода сквозь полупрозрачные экраны
+         не должен просвечивать чёрный корпус */
+      background: var(--screen-bg);
     }
     .stories .screen {
       position: absolute;
@@ -653,6 +656,7 @@
     .stories .screen.is-active {
       opacity: 1;
       transform: none;
+      z-index: 1;   /* входящий экран проявляется поверх уходящего */
       transition: opacity .3s ease-out, transform .3s ease-out;
     }
     /* неактивный экран и удержание пальца — анимации на паузе */
@@ -907,7 +911,11 @@
 
       function show(i) {
         clearTimeout(wd);
+        // глушим ОБА канала прошлого сегмента: animationend и onfinish
+        // приходят на одно завершение парой — второй сигнал не должен
+        // переключить экран ещё раз
         if (fill) fill.removeEventListener('animationend', onEnd);
+        if (anim) { anim.onfinish = null; anim = null; }
         idx = (i + screens.length) % screens.length;
         ended = false;
         advancing = false;
