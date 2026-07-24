@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Introvert Test — градиенты</title>
+  <title>Introvert Test — приглушённые зелёные</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; min-height: 100svh; }
     body {
-      background: linear-gradient(180deg, #0d142e 0%, #16204a 55%, #232f5e 100%);
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,19 +24,18 @@
     }
     .cell { text-align: center; }
     .label {
-      color: #fff;
+      color: #282828;
       font-size: 14px;
       margin-top: 12px;
-      opacity: .85;
     }
-    .label small { opacity: .6; display: block; margin-top: 2px; }
+    .label small { opacity: .55; display: block; margin-top: 2px; }
 
-    .phone { width: min(230px, 42vw); container-type: inline-size; }
+    .phone { width: min(240px, 42vw); container-type: inline-size; }
     .frame {
       padding: 2.6cqw;
       border-radius: 16.4cqw;
       background: #0c0c10;
-      box-shadow: inset 0 0 0 0.45cqw rgba(255,255,255,.12), 0 20px 45px rgba(0,0,0,.5);
+      box-shadow: inset 0 0 0 0.45cqw rgba(255,255,255,.12), 0 20px 45px rgba(13,40,66,.35);
     }
     .screen {
       position: relative;
@@ -45,19 +44,29 @@
       border-radius: 13.8cqw;
       overflow: hidden;
     }
-    .hero { position: absolute; inset: 0 0 auto 0; height: 45.29%; background: var(--g); }
+    .hero {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 71.55%;
+      border-radius: 0 0 8.62cqw 8.62cqw;
+      background: var(--g);
+    }
     .cat, .fire { position: absolute; display: block; }
-    .cat  { left: 7%; top: 8.3%; width: 53.6%; }
-    .fire { left: 54%; top: 17.2%; width: 35.7%; }
+    .cat  { left: 7%; top: 19%; width: 53.6%; }
+    .fire { left: 49.45%; top: 27.9%; width: 35.7%; }
     .card {
       position: absolute;
-      left: 3.64%; top: 38.08%; width: 92.73%; height: 19.14%;
-      background: #fff; border-radius: 5.2cqw;
-      box-shadow: 0 1px 4px rgba(12,12,13,.05);
+      left: 3.64%; top: 51.67%; width: 92.73%; height: 18.2%;
+      background: #fff; border-radius: 6.9cqw;
+      box-shadow: 0 1px 2px rgba(12,12,13,.05);
     }
     .island {
       position: absolute; top: 2.6cqw; left: 50%; transform: translateX(-50%);
       width: 27cqw; height: 8cqw; background: #000; border-radius: 4.5cqw; z-index: 5;
+    }
+    .home {
+      position: absolute; bottom: 1.72cqw; left: 50%; transform: translateX(-50%);
+      width: 31cqw; height: 1.08cqw; border-radius: 99cqw; background: #000;
     }
   </style>
 </head>
@@ -70,10 +79,11 @@
         <div class="frame">
           <div class="screen">
             <div class="hero"></div>
-            <img class="cat" src="assets/cat-happy.svg" alt="">
+            <img class="cat" src="assets/cat-proud.svg" alt="">
             <img class="fire" src="assets/fire-happy.svg" alt="">
             <div class="card"></div>
             <div class="island"></div>
+            <div class="home"></div>
           </div>
         </div>
       </div>
@@ -83,23 +93,17 @@
 
   <script>
     const variants = [
-      ["V1 — исходный",        "#180DA9", "#5B52FF"],
-      ["V2 — виноград",        "#3B0764", "#8B5CF6"],
-      ["V3 — индиго-ночь",     "#0D1440", "#4053D8"],
-      ["V4 — ультрамарин-неон","#1E40AF", "#22D3EE"],
-      ["V5 — закат",           "#4C1D95", "#EC4899"],
-      ["V6 — бирюза",          "#0E4C63", "#2DD4BF"],
-      ["V7 — перивинкл (референс)", "#34357D", "#6467C8"],
-      ["V8 — перивинкл светлый",    "#3D3E8F", "#7B7EE0"],
-      ["V9 — синий (как V7)",       "#2B3F80", "#5C82D6"],
-      ["V10 — синий глубокий",      "#223468", "#4A70C4"],
+      ["G1 — шалфей",            "#8CA265", "#5A6E42"],
+      ["G2 — мох",               "#7E9455", "#4C5F33"],
+      ["G3 — фисташка дымчатая", "#9BAF78", "#6B7F52"],
+      ["G4 — хаки-олива",        "#8E9A5E", "#5F6A3B"],
     ];
     const grid = document.getElementById("grid");
     const tpl = document.getElementById("cell");
     for (const [name, from, to] of variants) {
       const cell = tpl.content.cloneNode(true);
       cell.querySelector(".screen").style.setProperty(
-        "--g", `linear-gradient(-21.06deg, ${from} 17.83%, ${to} 75.64%)`
+        "--g", `linear-gradient(152.54deg, ${from} 24.52%, ${to} 76.38%)`
       );
       cell.querySelector(".label").innerHTML =
         `${name}<small>${from} → ${to}</small>`;
