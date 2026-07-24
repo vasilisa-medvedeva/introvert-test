@@ -48,6 +48,27 @@
       overflow: hidden;
     }
 
+    .case-block { width: min(980px, 94vw); }
+    .case-block .case { width: 100%; }
+    .case-label {
+      margin: 0 4px 16px;
+      font-family: 'Onest', system-ui, sans-serif;
+      color: #282828;
+    }
+    .case-label h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+    .case-label p {
+      margin: 6px 0 0;
+      font-size: 15px;
+      line-height: 1.45;
+      color: #777;
+      max-width: 640px;
+    }
+
     /* ---- iPhone mockup ---- */
     .phone {
       width: min(278px, 60vw);
@@ -563,89 +584,13 @@
   </svg>
 
   <main class="stage">
-    <!-- Case 2: proud, hip-swaying cat with a speech bubble -->
-    <section class="case">
-      <div class="phone">
-        <div class="frame">
-          <div class="screen proud">
-            <div class="hero"></div>
-            <div class="date-heading">14–20 июля</div>
-            <div class="progress" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
-            <img class="close" src="assets/icon-close.svg" alt="">
-            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
-            <div class="bubble">Благодаря тебе я расту!</div>
-            <img class="cat"  src="assets/cat-proud.svg"  alt="Гордый котик пританцовывает у костра">
-            <img class="fire" src="assets/fire-happy.svg" alt="">
-            <div class="card">
-              <div class="card-row">
-                <img src="assets/icon-hormonizer-card.png" alt="">
-                <div>
-                  <p class="title">Во мне больше всего вырос Гармонизатор</p>
-                  <p class="caption">Ты чаще всего смотрел про осознанность</p>
-                </div>
-              </div>
-              <div class="skill">
-                <div class="skill-track">
-                  <div class="skill-fill"><span class="skill-num">+7</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="others">Другие открытия недели</div>
-            <div class="chips">
-              <div class="chip">
-                <img src="assets/icon-lifehacker.png" alt="">
-                <span class="num">+1</span><span>Лайфхакер</span>
-              </div>
-              <div class="chip">
-                <img src="assets/icon-intuit.png" alt="">
-                <span class="num">+2</span><span>Интуит</span>
-              </div>
-            </div>
-            <div class="status" aria-hidden="true">
-              <span>9:41</span>
-              <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
-            </div>
-            <div class="island"></div>
-            <div class="home" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Case 3: sad shivering cat -->
-    <section class="case">
-      <div class="phone">
-        <div class="frame">
-          <div class="screen sad">
-            <div class="hero"></div>
-            <div class="date-heading">14–20 июля</div>
-            <div class="progress" aria-hidden="true"><span class="active"></span></div>
-            <img class="close" src="assets/icon-close.svg" alt="">
-            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
-            <div class="bubble">Зажёг бы кто костёр</div>
-            <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
-            <img class="fire" src="assets/fire-sad.svg" alt="">
-            <div class="sad-texts">
-              <p class="title">Придумаем что-нибудь?</p>
-              <p class="caption">Всего 15 минут, и Интровертушка будет в тепле</p>
-            </div>
-            <div class="course-cards">
-              <img class="c1" src="assets/card-course-1.png" alt="Курс: Тревожно-избегающая диада">
-              <img class="c2" src="assets/card-course-2.png" alt="Курс: Нейробиология тревожного расстройства">
-            </div>
-            <div class="fire-btn">Зажечь костёр</div>
-            <div class="status" aria-hidden="true">
-              <span>9:41</span>
-              <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
-            </div>
-            <div class="island"></div>
-            <div class="home" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Case 3 (duo): proud — пружинный вход, искры, счётчик -->
-    <section class="case">
+    <!-- Case 1: proud — пружинный вход, искры, счётчик -->
+    <section class="case-block">
+      <header class="case-label">
+        <h2>Скилл недели вырос</h2>
+        <p>Итог хорошей недели: +7 к Гармонизатору, костёр горит, Интровертушка гордится собой и благодарит пользователя.</p>
+      </header>
+      <div class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen proud duo">
@@ -696,10 +641,16 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
-    <!-- Case 4 (duo): sad — мягкий вход, пружинные карточки -->
-    <section class="case">
+    <!-- Case 2: sad — мягкий вход, пружинные карточки -->
+    <section class="case-block">
+      <header class="case-label">
+        <h2>Неделя без практик</h2>
+        <p>Костёр потух, Интровертушка замёрз — экран мягко возвращает к 15-минутному курсу кнопкой «Зажечь костёр».</p>
+      </header>
+      <div class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen sad duo">
@@ -728,6 +679,7 @@
             <div class="home" aria-hidden="true"></div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   </main>
