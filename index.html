@@ -97,7 +97,8 @@
     }
 
     /* ---- каскад появления элементов экрана ---- */
-    .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip { opacity: 0; }
+    .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip,
+    .sad-texts, .course-cards, .fire-btn { opacity: 0; }
     .progress     { animation: rise-in .45s ease-out .1s forwards; }
     .date-heading { animation: rise-in .45s ease-out .18s forwards; }
     .close        { animation: fade-in .4s ease-out .26s forwards; }
@@ -107,6 +108,9 @@
     .others       { animation: rise-in .45s ease-out .62s forwards; }
     .chips .chip:first-child { animation: rise-in .45s ease-out .72s forwards; }
     .chips .chip:last-child  { animation: rise-in .45s ease-out .8s forwards; }
+    .sad-texts    { animation: rise-in .45s ease-out .5s forwards; }
+    .course-cards { animation: rise-in .45s ease-out .62s forwards; }
+    .fire-btn     { animation: rise-in .45s ease-out .78s forwards; }
     @keyframes fade-in { to { opacity: 1; } }
     @keyframes rise-in {
       from { opacity: 0; transform: translateY(2.5cqw); }
@@ -122,8 +126,62 @@
     .screen.happy .fire { left: 50.97%; top: 33.46%; width: 35.7%; }
     .screen.proud .cat  { left: 6.79%; top: 25.52%; width: 53.94%; }
     .screen.proud .fire { left: 50.97%; top: 33.46%; width: 35.7%; }
-    .screen.sad .cat    { left: 1%;    top: 26.3%;  width: 57%; }
-    .screen.sad .fire   { left: 51.5%; top: 31.2%;  width: 35.3%; }
+    .screen.sad .cat    { left: 0%;    top: 25.25%; width: 60.3%; }
+    .screen.sad .fire   { left: 51.4%; top: 28.3%;  width: 39.6%; }
+
+    /* sad screen (design 2051:5004): высокий градиент, тексты и карточки курсов */
+    .screen.sad .hero { height: 86.82%; }
+    .screen.sad .bubble      { top: 30.86%; }
+    .screen.sad .bubble-tail { top: 33.68%; }
+    .sad-texts {
+      position: absolute;
+      left: 3.45cqw;
+      top: 54.18%;
+      z-index: 3;
+      color: #fff;
+    }
+    .sad-texts .title {
+      margin: 0;
+      font-size: 4.74cqw;
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: .005em;
+    }
+    .sad-texts .caption {
+      margin: .9cqw 0 0;
+      font-size: 3cqw;
+      font-weight: 400;
+      letter-spacing: -.057em;
+    }
+    .course-cards {
+      position: absolute;
+      left: 2.05%;
+      top: 60.15%;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      gap: 1cqw;
+      overflow: hidden;
+    }
+    .course-cards img { display: block; height: auto; }
+    .course-cards .c1 { width: 60.23%; flex: none; }
+    .course-cards .c2 { width: 38.18%; flex: none; }
+    .fire-btn {
+      position: absolute;
+      left: 3.64%;
+      top: 90.59%;
+      width: 92.73%;
+      height: 9.48cqw;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FFE352;
+      border-radius: 3.45cqw;
+      color: #202020;
+      font-size: 3cqw;
+      font-weight: 600;
+    }
 
     /* ---- speech bubble (proud) ---- */
     .bubble {
@@ -188,7 +246,6 @@
       padding: 3.45cqw 3.45cqw 3cqw;
       color: var(--ink);
     }
-    .screen.sad .card { height: 17.4%; }
     .card-row {
       display: flex;
       gap: 2.59cqw;
@@ -371,7 +428,8 @@
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
       .skill-num { opacity: 1; }
       .bubble, .bubble-tail { opacity: 1; transform: none; }
-      .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip { opacity: 1; }
+      .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip,
+      .sad-texts, .course-cards, .fire-btn { opacity: 1; }
     }
   </style>
 </head>
@@ -502,9 +560,19 @@
             <div class="date-heading">14-20 июля</div>
             <div class="progress" aria-hidden="true"><span class="active"></span></div>
             <img class="close" src="assets/icon-close.svg" alt="">
+            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
+            <div class="bubble">Зажёг бы кто костёр</div>
             <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
             <img class="fire" src="assets/fire-sad.svg" alt="">
-            <div class="card"></div>
+            <div class="sad-texts">
+              <p class="title">Придумаем что-нибудь?</p>
+              <p class="caption">Всего 15 минут, и Интровертушка будет в тепле</p>
+            </div>
+            <div class="course-cards">
+              <img class="c1" src="assets/card-course-1.png" alt="Курс: Тревожно-избегающая диада">
+              <img class="c2" src="assets/card-course-2.png" alt="Курс: Нейробиология тревожного расстройства">
+            </div>
+            <div class="fire-btn">Зажечь костёр</div>
             <div class="status" aria-hidden="true">
               <span>9:41</span>
               <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
