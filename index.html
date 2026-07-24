@@ -875,23 +875,38 @@
         if (bar) bar.innerHTML = screens.map(() => '<span><i></i></span>').join('');
       });
 
-      let idx = -1, fill = null, ended = false, activated = false, advancing = false;
+      let idx = -1, fill = null, anim = null, ended = false, activated = false, advancing = false, wd = 0;
 
       const onEnd = () => {
         if (advancing) return;            // animationend и onfinish могут прийти оба
         advancing = true;
+        clearTimeout(wd);
         if (idx + 1 >= screens.length && once) { ended = true; return; }
         show(idx + 1);
       };
 
+      // страховка на случай, если событие конца анимации не долетело:
+      // переключаем, только когда полоса действительно заполнилась — рассинхрон невозможен
+      const left = () => (anim && typeof anim.currentTime === 'number'
+        ? Math.max(SEG_MS - anim.currentTime, 0) : SEG_MS);
+      const arm = () => {
+        clearTimeout(wd);
+        if (ended) return;
+        wd = setTimeout(() => (left() > 80 ? arm() : onEnd()), left() + 250);
+      };
+
       const play = () => {
-        if (fill && !ended) fill.style.animationPlayState = 'running';
+        if (!fill || ended) return;
+        fill.style.animationPlayState = 'running';
+        arm();
       };
       const pause = () => {
+        clearTimeout(wd);
         if (fill) fill.style.animationPlayState = 'paused';
       };
 
       function show(i) {
+        clearTimeout(wd);
         if (fill) fill.removeEventListener('animationend', onEnd);
         idx = (i + screens.length) % screens.length;
         ended = false;
@@ -917,8 +932,9 @@
         void fill.offsetWidth;
         fill.className = 'is-filling';
         fill.addEventListener('animationend', onEnd);
-        const anim = fill.getAnimations()[0];
+        anim = fill.getAnimations().find((a) => a.animationName === 'seg-fill') || null;
         if (anim) anim.onfinish = onEnd;
+        arm();
       }
 
       // тап по половинкам, удержание — пауза
