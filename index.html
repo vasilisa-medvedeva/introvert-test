@@ -128,7 +128,10 @@
     .screen.sad .fire   { left: 51.4%; top: 28.3%;  width: 39.6%; }
 
     /* sad screen (design 2051:5004): высокий градиент, тексты и карточки курсов */
-    .screen.sad .hero { height: 86.82%; }
+    .screen.sad .hero {
+      height: 86.82%;
+      border-radius: 0 0 0 6.9cqw; /* в макете скруглён только левый нижний угол */
+    }
     .screen.sad .bubble      { top: 30.86%; }
     .screen.sad .bubble-tail { top: 33.68%; }
     .sad-texts {
@@ -168,8 +171,9 @@
       border-radius: 3.45cqw;
       box-shadow: 0 1px 2px rgba(12, 12, 13, .05);
     }
-    .course-cards .c1 { width: 57.05%; }
-    .course-cards .c2 { width: 36.59%; border-radius: 3.45cqw 0 0 3.45cqw; } /* правый край уходит за экран */
+    /* ширины в % от контейнера (96.36% экрана): 251px и 161px макета */
+    .course-cards .c1 { width: 59.21%; }
+    .course-cards .c2 { width: 37.97%; border-radius: 3.45cqw 0 0 3.45cqw; } /* правый край уходит за экран */
     .fire-btn {
       position: absolute;
       left: 3.64%;
