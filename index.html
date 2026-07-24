@@ -162,14 +162,13 @@
     .screen.sad.duo .cat  { animation: duo-soft-in .45s ease-out .25s forwards; }
     .screen.sad.duo .fire { animation: duo-soft-in .45s ease-out .4s forwards; }
     .screen.duo .card { animation: duo-card-in .45s cubic-bezier(.34, 1.56, .64, 1) .65s forwards; }
-    .screen.duo .chips .chip:first-child { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) 1.25s forwards; }
-    .screen.duo .chips .chip:last-child  { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) 1.36s forwards; }
+    /* «Другие открытия недели» и чипы выезжают одним блоком */
+    .screen.duo .others,
+    .screen.duo .chips .chip { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) 1.25s forwards; }
     .screen.duo .skill-fill { animation-delay: 1.1s; } /* бар и счётчик стартуют вместе */
     .screen.duo .skill-num  { animation: num-in .15s ease 1.08s forwards; }
-    .screen.sad.duo .course-cards { opacity: 1; animation: none; }
-    .screen.sad.duo .course-cards img { opacity: 0; }
-    .screen.sad.duo .course-cards .c1 { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
-    .screen.sad.duo .course-cards .c2 { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .73s forwards; }
+    /* карточки курсов — тоже единым блоком */
+    .screen.sad.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
     .screen.sad.duo .fire-btn { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .84s forwards; }
 
     @keyframes duo-cat-in {
@@ -308,28 +307,27 @@
     }
 
     /* ---- второй экран продуктивной недели (design 2058:5536) ---- */
-    .screen.finish { background: #fff; }
-    .glow-a, .glow-b { position: absolute; pointer-events: none; }
-    .glow-a {
-      right: -32%; top: 26%; width: 95%; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(124, 91, 255, .38), transparent 70%);
+    .screen.finish {
+      background: #fff;
+      --seg-fill: #88BD00;                  /* прогресс на белом фоне — зелёный */
+      --seg-bg: rgba(136, 189, 0, .3);
     }
+    .glow-a, .glow-b { position: absolute; pointer-events: none; }
+    /* зелёное свечение справа: центр (413,309) макета, эллипс 866×399, −17.5° */
+    .glow-a {
+      left: -4.5%; top: 11.5%; width: 197%; height: 41.7%;
+      transform: rotate(-17.5deg);
+      background: radial-gradient(closest-side, rgba(156, 216, 0, .4), rgba(135, 188, 1, 0) 88%);
+    }
+    /* жёлтое свечение слева: центр (18,467) макета, эллипс 810×373, −5.3° */
     .glow-b {
-      left: -32%; top: 29%; width: 100%; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(255, 91, 187, .38), transparent 74%);
+      left: -87.9%; top: 29.3%; width: 184%; height: 39%;
+      transform: rotate(-5.3deg);
+      background: radial-gradient(closest-side, rgba(255, 240, 78, .4), rgba(255, 240, 78, 0) 100%);
     }
     .screen.finish .date-heading { color: #282828; }
     .screen.finish .status { color: #090909; }
     .screen.finish .status svg { filter: brightness(0); }
-    .screen.finish .progress span { background: rgba(255, 146, 210, .35); }
-    .screen.finish .progress .done::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: #FF92D2;
-    }
-    .screen.finish .progress .active::after { background: #FF92D2; }
     .lesson-card {
       position: absolute;
       left: 3.64%;
@@ -368,32 +366,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #FF92D2;
-      border-radius: 1.29cqw;
+      background: #94CB09;
+      border-radius: 1.36cqw;
       color: #fff;
-      font-size: 3.45cqw;
+      font-size: 3.64cqw;
       font-weight: 500;
       letter-spacing: -.037em;
     }
     .stat p { margin: 0; width: 28.9cqw; font-size: 2.8cqw; line-height: 1.23; color: #000; letter-spacing: -.046em; }
 
-    /* появление и «дыхание» finish-экрана */
-    .lesson-card, .lesson-card .passed, .finish-texts .t1, .finish-texts .t2, .stat, .glow-a, .glow-b { opacity: 0; }
+    /* появление и «дыхание» finish-экрана; бейдж «Пройдено» вылетает вместе с карточкой */
+    .lesson-card, .finish-texts .t1, .finish-texts .t2, .stat, .glow-a, .glow-b { opacity: 0; }
     .glow-a { animation: glow-in 1s ease .2s forwards, glow-drift 6s ease-in-out 1.2s infinite alternate; }
     .glow-b { animation: glow-in 1s ease .35s forwards, glow-drift 6s ease-in-out 4.2s infinite alternate; }
     .lesson-card { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) .3s forwards; }
-    .lesson-card .passed { animation: badge-pop .45s ease-out .75s forwards; }
     .finish-texts .t1 { animation: rise-in .45s ease-out .9s forwards; }
     .finish-texts .t2 { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) 1s forwards; }
     .stat { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) 1.2s forwards; }
     @keyframes pop-rise {
       from { opacity: 0; transform: translateY(2.6cqw) scale(.85); }
       to   { opacity: 1; transform: none; }
-    }
-    @keyframes badge-pop {
-      0%   { opacity: 0; transform: scale(0) rotate(-8deg); }
-      70%  { opacity: 1; transform: scale(1.12) rotate(2deg); }
-      100% { opacity: 1; transform: none; }
     }
     @keyframes glow-in { to { opacity: 1; } }
     @keyframes glow-drift {
@@ -605,7 +597,7 @@
       z-index: 6;
     }
 
-    /* ---- story progress + close ---- */
+    /* ---- сторис-прогресс (сегмент на экран) + close ---- */
     .progress {
       position: absolute;
       top: 16cqw; /* 74px макета: контейнер top 62 + py 12 */
@@ -613,26 +605,62 @@
       right: 0;
       z-index: 4;
       display: flex;
-      gap: 1.7cqw;
+      gap: .91cqw;   /* 4px макета */
       padding: 0 3.45cqw;
     }
     .progress span {
       flex: 1;
-      height: .9cqw;
-      border-radius: .45cqw;
-      background: rgba(255, 255, 255, .4);
-      position: relative;
+      height: .68cqw;        /* 3px макета */
+      border-radius: .45cqw; /* 2px макета */
+      background: var(--seg-bg, rgba(255, 255, 255, .3));
+      overflow: hidden;
     }
-    .progress .active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 51%;
+    .progress i {
+      display: block;
+      height: 100%;
       border-radius: inherit;
-      background: #fff;
+      background: var(--seg-fill, #fff);
+      transform: scaleX(0);
+      transform-origin: left center;
+      will-change: transform;
     }
+    .progress i.is-done { transform: scaleX(1); }
+    /* активный сегмент заполняется композитором; конец ловим по animationend */
+    .progress i.is-filling { animation: seg-fill 5000ms linear forwards; }
+    @keyframes seg-fill {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    /* ---- сторис-контейнер: экраны стопкой, переход fade + slide ---- */
+    .stories {
+      position: relative;
+      aspect-ratio: 440 / 956;
+      border-radius: 13.8cqw;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    .stories .screen {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+    .stories .screen.is-active {
+      opacity: 1;
+      transform: none;
+      transition: opacity .3s ease-out, transform .3s ease-out;
+    }
+    /* неактивный экран и удержание пальца — анимации на паузе */
+    .stories .screen:not(.is-active) * { animation-play-state: paused !important; }
+    .stories.is-held .screen.is-active * { animation-play-state: paused !important; }
+    /* мгновенный сброс каскада при переключении экрана */
+    .screen.reset * { animation: none !important; }
+
     .close {
       position: absolute;
       top: 20.3cqw;
@@ -652,10 +680,10 @@
       .bubble, .bubble-tail { opacity: 1; transform: none; }
       .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip,
       .sad-texts, .course-cards, .fire-btn,
-      .screen.sad.duo .course-cards img,
-      .lesson-card, .lesson-card .passed, .finish-texts .t1, .finish-texts .t2,
+      .lesson-card, .finish-texts .t1, .finish-texts .t2,
       .stat, .glow-a, .glow-b { opacity: 1; }
       .star { visibility: hidden; } /* искры скрыты без анимации */
+      .stories .screen { transition: none; }
     }
   </style>
 </head>
@@ -689,87 +717,85 @@
         <p>Показываем любимую категорию пользователя и его достижения в других темах, чтобы сделать прогресс заметнее.</p>
       </header>
       <div class="case">
-      <div class="phone">
-        <div class="frame">
-          <div class="screen proud duo">
-            <div class="hero"></div>
-            <div class="date-heading">14–20 июля</div>
-            <div class="progress" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
-            <img class="close" src="assets/icon-close.svg" alt="">
-            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
-            <div class="bubble">Благодаря тебе я расту!</div>
-            <svg class="star star-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
-            <svg class="star star-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="rgba(255,255,255,.85)"/></svg>
-            <svg class="star star-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="rgba(255,255,255,.7)"/></svg>
-            <svg class="star star-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
-            <svg class="star star-5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
-            <img class="cat"  src="assets/cat-proud.svg"  alt="Гордый котик пританцовывает у костра">
-            <img class="fire" src="assets/fire-happy.svg" alt="">
-            <div class="card">
-              <div class="card-row">
-                <img src="assets/icon-hormonizer-card.png" alt="">
-                <div>
-                  <p class="title">Во мне больше всего вырос Гармонизатор</p>
-                  <p class="caption">Ты чаще всего смотрел про осознанность</p>
+        <div class="phone">
+          <div class="frame">
+            <div class="stories" data-loop="loop">
+            <div class="screen proud duo">
+              <div class="hero"></div>
+              <div class="date-heading">14–20 июля</div>
+              <div class="progress" aria-hidden="true"></div>
+              <img class="close" src="assets/icon-close.svg" alt="">
+              <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
+              <div class="bubble">Благодаря тебе я расту!</div>
+              <svg class="star star-1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
+              <svg class="star star-2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="rgba(255,255,255,.85)"/></svg>
+              <svg class="star star-3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="rgba(255,255,255,.7)"/></svg>
+              <svg class="star star-4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
+              <svg class="star star-5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg>
+              <img class="cat"  src="assets/cat-proud.svg"  alt="Гордый котик пританцовывает у костра">
+              <img class="fire" src="assets/fire-happy.svg" alt="">
+              <div class="card">
+                <div class="card-row">
+                  <img src="assets/icon-hormonizer-card.png" alt="">
+                  <div>
+                    <p class="title">Во мне больше всего вырос Гармонизатор</p>
+                    <p class="caption">Ты чаще всего смотрел про осознанность</p>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-track">
+                    <div class="skill-fill"><span class="skill-num">+7</span></div>
+                  </div>
                 </div>
               </div>
-              <div class="skill">
-                <div class="skill-track">
-                  <div class="skill-fill"><span class="skill-num">+7</span></div>
+              <div class="others">Другие открытия недели</div>
+              <div class="chips">
+                <div class="chip">
+                  <img src="assets/icon-lifehacker.png" alt="">
+                  <span class="num">+1</span><span>Лайфхакер</span>
+                </div>
+                <div class="chip">
+                  <img src="assets/icon-intuit.png" alt="">
+                  <span class="num">+2</span><span>Интуит</span>
                 </div>
               </div>
-            </div>
-            <div class="others">Другие открытия недели</div>
-            <div class="chips">
-              <div class="chip">
-                <img src="assets/icon-lifehacker.png" alt="">
-                <span class="num">+1</span><span>Лайфхакер</span>
+              <div class="status" aria-hidden="true">
+                <span>9:41</span>
+                <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
               </div>
-              <div class="chip">
-                <img src="assets/icon-intuit.png" alt="">
-                <span class="num">+2</span><span>Интуит</span>
+              <div class="island"></div>
+              <div class="home" aria-hidden="true"></div>
+            </div>
+            <div class="screen finish duo">
+              <div class="glow-b" aria-hidden="true"></div>
+              <div class="glow-a" aria-hidden="true"></div>
+              <div class="date-heading">14–20 июля</div>
+              <div class="progress" aria-hidden="true"></div>
+              <img class="close" src="assets/icon-close-dark.svg" alt="">
+              <div class="lesson-card">
+                <img class="cover" src="assets/lesson-cover.png" alt="Лекция: как управлять тревогой">
+                <div class="passed">Пройдено</div>
+                <p class="l-title">Как управлять тревогой: замечать, понимать, отпускать</p>
+                <p class="l-dur">46 минут</p>
               </div>
+              <div class="finish-texts">
+                <p class="t1">Ты возвращался к лекции три раза</p>
+                <p class="t2">и всё-таки досмотрел!</p>
+              </div>
+              <div class="stat">
+                <div class="pill">5/6</div>
+                <p>Лекций ты досмотрел до конца</p>
+              </div>
+              <div class="status" aria-hidden="true">
+                <span>9:41</span>
+                <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
+              </div>
+              <div class="island"></div>
+              <div class="home" aria-hidden="true"></div>
             </div>
-            <div class="status" aria-hidden="true">
-              <span>9:41</span>
-              <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
             </div>
-            <div class="island"></div>
-            <div class="home" aria-hidden="true"></div>
           </div>
         </div>
-      </div>
-      <div class="phone">
-        <div class="frame">
-          <div class="screen finish duo">
-            <div class="glow-b" aria-hidden="true"></div>
-            <div class="glow-a" aria-hidden="true"></div>
-            <div class="date-heading">14–20 июля</div>
-            <div class="progress" aria-hidden="true"><span class="done"></span><span class="active"></span><span></span></div>
-            <img class="close" src="assets/icon-close-dark.svg" alt="">
-            <div class="lesson-card">
-              <img class="cover" src="assets/lesson-cover.png" alt="Лекция: как управлять тревогой">
-              <div class="passed">Пройдено</div>
-              <p class="l-title">Как управлять тревогой: замечать, понимать, отпускать</p>
-              <p class="l-dur">46 минут</p>
-            </div>
-            <div class="finish-texts">
-              <p class="t1">Ты возвращался к ней три раза</p>
-              <p class="t2">и всё-таки досмотрел!</p>
-            </div>
-            <div class="stat">
-              <div class="pill">5/6</div>
-              <p>Лекций ты досмотрел до конца</p>
-            </div>
-            <div class="status" aria-hidden="true">
-              <span>9:41</span>
-              <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
-            </div>
-            <div class="island"></div>
-            <div class="home" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
       </div>
     </section>
 
@@ -781,32 +807,35 @@
         <p>По кнопке «Зажечь костёр» пользователь попадает к коротким лекциям и видео, которые уже начинал смотреть, но не досмотрел. По тапу на лекцию из предложенных начинаем проигрывать плеер.</p>
       </header>
       <div class="case">
-      <div class="phone">
-        <div class="frame">
-          <div class="screen sad duo">
-            <div class="hero"></div>
-            <div class="date-heading">14–20 июля</div>
-            <div class="progress" aria-hidden="true"><span class="active"></span></div>
-            <img class="close" src="assets/icon-close.svg" alt="">
-            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
-            <div class="bubble">Зажёг бы кто костёр</div>
-            <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
-            <img class="fire" src="assets/fire-sad.svg" alt="">
-            <div class="sad-texts">
-              <p class="title">Придумаем что-нибудь?</p>
-              <p class="caption">Всего 15 минут, и Интровертушка будет в тепле</p>
+        <div class="phone">
+          <div class="frame">
+            <div class="stories" data-loop="once">
+            <div class="screen sad duo">
+              <div class="hero"></div>
+              <div class="date-heading">14–20 июля</div>
+              <div class="progress" aria-hidden="true"></div>
+              <img class="close" src="assets/icon-close.svg" alt="">
+              <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
+              <div class="bubble">Зажёг бы кто костёр</div>
+              <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
+              <img class="fire" src="assets/fire-sad.svg" alt="">
+              <div class="sad-texts">
+                <p class="title">Придумаем что-нибудь?</p>
+                <p class="caption">Всего 15 минут, и Интровертушка будет в тепле</p>
+              </div>
+              <div class="course-cards">
+                <img class="c1" src="assets/card-course-1.png" alt="Курс: Тревожно-избегающая диада">
+                <img class="c2" src="assets/card-course-2.png" alt="Курс: Нейробиология тревожного расстройства">
+              </div>
+              <div class="fire-btn">Зажечь костёр</div>
+              <div class="status" aria-hidden="true">
+                <span>9:41</span>
+                <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
+              </div>
+              <div class="island"></div>
+              <div class="home" aria-hidden="true"></div>
             </div>
-            <div class="course-cards">
-              <img class="c1" src="assets/card-course-1.png" alt="Курс: Тревожно-избегающая диада">
-              <img class="c2" src="assets/card-course-2.png" alt="Курс: Нейробиология тревожного расстройства">
             </div>
-            <div class="fire-btn">Зажечь костёр</div>
-            <div class="status" aria-hidden="true">
-              <span>9:41</span>
-              <svg viewBox="0 0 77.7 13"><use href="#status-icons"/></svg>
-            </div>
-            <div class="island"></div>
-            <div class="home" aria-hidden="true"></div>
           </div>
         </div>
       </div>
@@ -815,31 +844,152 @@
   </main>
 
   <script>
-    // анимации кейса стартуют, когда его докрутили до вьюпорта;
-    // счётчик «+7» на duo-экранах считает 1 -> 7 синхронно с ростом бара
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SEG_MS = 5000;   // длительность одного экрана
+    const HOLD_MS = 200;   // после этого удержание считается паузой, а не тапом
+
+    // счётчик «+7»: считает 1 -> 7 синхронно с ростом прогресс-бара скилла
     const startCounter = (scr) => {
       const el = scr.querySelector('.skill-num');
-      if (!el || reduced) return;
-      setTimeout(() => {
+      if (!el) return;
+      clearTimeout(el._wait);
+      clearInterval(el._tick);
+      if (reduced) { el.textContent = '+7'; return; }
+      el.textContent = '+1';
+      el._wait = setTimeout(() => {
         const t0 = performance.now();
-        const iv = setInterval(() => {
+        el._tick = setInterval(() => {
           const p = Math.min((performance.now() - t0) / 500, 1);
           el.textContent = '+' + (1 + Math.round(p * 6));
-          if (p >= 1) clearInterval(iv);
+          if (p >= 1) clearInterval(el._tick);
         }, 60);
       }, 1100);
     };
+
+    // сторис-плеер: сегмент на экран, автопереход, тап влево/вправо, удержание — пауза
+    const makeStory = (root) => {
+      const screens = [...root.querySelectorAll('.screen')];
+      const once = root.dataset.loop === 'once';
+      screens.forEach((scr) => {
+        const bar = scr.querySelector('.progress');
+        if (bar) bar.innerHTML = screens.map(() => '<span><i></i></span>').join('');
+      });
+
+      let idx = -1, fill = null, ended = false, activated = false, advancing = false;
+
+      const onEnd = () => {
+        if (advancing) return;            // animationend и onfinish могут прийти оба
+        advancing = true;
+        if (idx + 1 >= screens.length && once) { ended = true; return; }
+        show(idx + 1);
+      };
+
+      const play = () => {
+        if (fill && !ended) fill.style.animationPlayState = 'running';
+      };
+      const pause = () => {
+        if (fill) fill.style.animationPlayState = 'paused';
+      };
+
+      function show(i) {
+        if (fill) fill.removeEventListener('animationend', onEnd);
+        idx = (i + screens.length) % screens.length;
+        ended = false;
+        advancing = false;
+        const scr = screens[idx];
+        screens.forEach((s, n) => s.classList.toggle('is-active', n === idx));
+
+        // сброс каскада, чтобы экран проиграл вход заново
+        scr.classList.add('reset');
+        void scr.offsetWidth;
+        scr.classList.remove('reset');
+        if (activated) startCounter(scr);   // до появления в кадре счётчик ждёт
+
+        // сегменты: пройденные залиты, будущие пусты, активный — заполняется
+        const segs = [...scr.querySelectorAll('.progress i')];
+        segs.forEach((el, n) => {
+          el.className = n < idx ? 'is-done' : '';
+          el.style.animationPlayState = '';
+        });
+        fill = segs[idx];
+        if (!fill) return;
+        if (reduced) { fill.className = 'is-done'; return; }
+        void fill.offsetWidth;
+        fill.className = 'is-filling';
+        fill.addEventListener('animationend', onEnd);
+        const anim = fill.getAnimations()[0];
+        if (anim) anim.onfinish = onEnd;
+      }
+
+      // тап по половинкам, удержание — пауза
+      let holdTimer = 0, held = false;
+      root.addEventListener('pointerdown', () => {
+        held = false;
+        holdTimer = setTimeout(() => {
+          held = true;
+          root.classList.add('is-held');
+          pause();
+        }, HOLD_MS);
+      });
+      const release = (e) => {
+        clearTimeout(holdTimer);
+        if (held) {
+          held = false;
+          root.classList.remove('is-held');
+          play();
+          return;
+        }
+        const r = root.getBoundingClientRect();
+        show(idx + (e.clientX - r.left > r.width / 2 ? 1 : -1));
+      };
+      root.addEventListener('pointerup', release);
+      root.addEventListener('pointercancel', () => {
+        clearTimeout(holdTimer);
+        if (held) { held = false; root.classList.remove('is-held'); play(); }
+      });
+
+      return {
+        init: () => show(0),   // первый экран виден сразу, анимации ждут .in-view
+        start: () => {
+          if (!activated) { activated = true; startCounter(screens[idx]); }
+          play();
+        },
+        pause,
+      };
+    };
+
+    // анимации и сторис стартуют, когда кейс докрутили до вьюпорта
+    const byCase = new Map();
+    document.querySelectorAll('.stories').forEach((root) => {
+      const story = makeStory(root);
+      byCase.set(root.closest('.case'), story);
+      story.init();
+    });
+
+    let ioFired = false;
     const io = new IntersectionObserver((entries) => {
+      ioFired = true;
       entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('in-view');
-        const duo = e.target.querySelector('.screen.duo');
-        if (duo) startCounter(duo);
-        io.unobserve(e.target);
+        const story = byCase.get(e.target);
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          story && story.start();
+        } else {
+          story && story.pause();
+        }
       });
     }, { threshold: .35 });
     document.querySelectorAll('.case').forEach((c) => io.observe(c));
+
+    // страховка: если IntersectionObserver недоступен, запускаем всё сразу
+    setTimeout(() => {
+      if (ioFired) return;
+      document.querySelectorAll('.case').forEach((c) => {
+        c.classList.add('in-view');
+        const story = byCase.get(c);
+        story && story.start();
+      });
+    }, 1200);
   </script>
 </body>
 </html>
