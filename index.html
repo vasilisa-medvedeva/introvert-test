@@ -96,6 +96,27 @@
       display: block;
     }
 
+    /* ---- каскад появления элементов экрана ---- */
+    .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip { opacity: 0; }
+    .progress     { animation: rise-in .45s ease-out .1s forwards; }
+    .date-heading { animation: rise-in .45s ease-out .18s forwards; }
+    .close        { animation: fade-in .4s ease-out .26s forwards; }
+    .cat          { animation: scene-in .5s cubic-bezier(.34, 1.56, .64, 1) .25s forwards; }
+    .fire         { animation: scene-in .5s cubic-bezier(.34, 1.56, .64, 1) .38s forwards; }
+    .card         { animation: rise-in .45s ease-out .5s forwards; }
+    .others       { animation: rise-in .45s ease-out .62s forwards; }
+    .chips .chip:first-child { animation: rise-in .45s ease-out .72s forwards; }
+    .chips .chip:last-child  { animation: rise-in .45s ease-out .8s forwards; }
+    @keyframes fade-in { to { opacity: 1; } }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(2.5cqw); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scene-in {
+      from { opacity: 0; transform: translateY(3cqw) scale(.92); }
+      to   { opacity: 1; transform: none; }
+    }
+
     /* scene placement (design 2051:4323) */
     .screen.happy .cat  { left: 5%;    top: 25%;    width: 53.6%; }
     .screen.happy .fire { left: 50.97%; top: 33.46%; width: 35.7%; }
@@ -134,13 +155,13 @@
     }
     .bubble {
       animation:
-        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) forwards,
-        bubble-float 2.4s ease-in-out .45s infinite;
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) .55s forwards,
+        bubble-float 2.4s ease-in-out 1s infinite;
     }
     .bubble-tail {
       animation:
-        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) forwards,
-        tail-float 2.4s ease-in-out .45s infinite;
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) .55s forwards,
+        tail-float 2.4s ease-in-out 1s infinite;
     }
     @keyframes bubble-in {
       to { opacity: 1; transform: scale(1); }
@@ -206,7 +227,7 @@
       width: 25.5%; /* стартовая ширина, вырастет до 30.85% (+7) */
       border-radius: inherit;
       background: #5A7C01;
-      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.1s forwards;
+      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards;
     }
     .skill-num {
       position: absolute;
@@ -216,7 +237,7 @@
       font-size: 2.8cqw;
       color: #fff;
       opacity: 0;
-      animation: num-in .3s ease .5s forwards;
+      animation: num-in .3s ease 1.05s forwards;
     }
     @keyframes skill-grow { to { width: 30.85%; } }
     @keyframes num-in { to { opacity: 1; } }
@@ -350,6 +371,7 @@
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
       .skill-num { opacity: 1; }
       .bubble, .bubble-tail { opacity: 1; transform: none; }
+      .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip { opacity: 1; }
     }
   </style>
 </head>
