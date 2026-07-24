@@ -11,7 +11,7 @@
   .ear-l      { transform-origin: 170.1px 113.6px;  animation: proud-ear-l 2.4s ease-in-out infinite; }
   .ear-r      { transform-origin: 66.9px 104.4px;  animation: proud-ear-r 2.4s ease-in-out infinite; }
   .face       { transform-origin: 117.9px 125.1px;   animation: proud-face 2.4s ease-in-out infinite; }
-  .mouth      { transform-origin: 114.3px 144.3px;  animation: proud-smile 2.4s ease-in-out infinite; }
+  .eyes       { transform-origin: 113.3px 122.3px;   animation: blink 3.6s linear infinite; }
   .ball       { animation: proud-ball 1.2s ease-in-out infinite alternate; }
 
   @keyframes proud-dance {
@@ -53,9 +53,9 @@
     0%, 100% { transform: translate(.6px, -1.5px) rotate(1deg); }
     50%      { transform: translate(-.6px, -1.5px) rotate(-1deg); }
   }
-  @keyframes proud-smile {
-    0%, 100% { transform: scale(1, 1); }
-    25%, 75% { transform: scale(1.06, 1.08); }
+  @keyframes blink {
+    0%, 92%, 96.5%, 100% { transform: scaleY(1); }
+    94%                  { transform: scaleY(.08); }
   }
   @keyframes proud-ball {
     from { transform: translateY(0); }
