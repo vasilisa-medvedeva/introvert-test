@@ -206,7 +206,7 @@
       width: 25.5%; /* стартовая ширина, вырастет до 30.85% (+7) */
       border-radius: inherit;
       background: #5A7C01;
-      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards;
+      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.1s forwards;
     }
     .skill-num {
       position: absolute;
@@ -216,29 +216,10 @@
       font-size: 2.8cqw;
       color: #fff;
       opacity: 0;
-      animation: num-in .3s ease 1.7s forwards;
-    }
-    .plus-fly {
-      position: absolute;
-      left: 25cqw;
-      top: -3.4cqw;
-      font-size: 2.8cqw;
-      font-weight: 700;
-      color: #3D5400;
-      opacity: 0;
-      transform: translate(10cqw, -8cqw) rotate(-15deg) scale(.8);
-      animation:
-        plus-fly-in .7s cubic-bezier(.22, .9, .36, 1) .8s forwards,
-        plus-fade .4s ease 1.9s forwards;
+      animation: num-in .3s ease .5s forwards;
     }
     @keyframes skill-grow { to { width: 30.85%; } }
     @keyframes num-in { to { opacity: 1; } }
-    @keyframes plus-fly-in {
-      to { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(1); }
-    }
-    @keyframes plus-fade {
-      to { opacity: 0; transform: translate(-1cqw, 1.5cqw) rotate(-15deg) scale(.6); }
-    }
 
     /* ---- other discoveries ---- */
     .others {
@@ -417,7 +398,6 @@
                 <div class="skill-track">
                   <div class="skill-fill"><span class="skill-num">+7</span></div>
                 </div>
-                <span class="plus-fly">+7</span>
               </div>
             </div>
             <div class="others">Другие открытия недели</div>
@@ -467,7 +447,6 @@
                 <div class="skill-track">
                   <div class="skill-fill"><span class="skill-num">+7</span></div>
                 </div>
-                <span class="plus-fly">+7</span>
               </div>
             </div>
             <div class="others">Другие открытия недели</div>
