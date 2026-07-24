@@ -526,6 +526,9 @@
       z-index: 4;
     }
 
+    /* каскад ждёт, пока кейс докрутят до вьюпорта */
+    .case:not(.in-view) .screen * { animation-play-state: paused !important; }
+
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
@@ -730,20 +733,31 @@
   </main>
 
   <script>
-    // счётчик «+7» на duo-экранах: считает 0 -> 7 синхронно с ростом бара
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.screen.duo .skill-num').forEach((el) => {
-        setTimeout(() => {
-          const t0 = performance.now();
-          const tick = (now) => {
-            const p = Math.min((now - t0) / 500, 1);
-            el.textContent = '+' + Math.round(p * 7);
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }, 1100);
+    // анимации кейса стартуют, когда его докрутили до вьюпорта;
+    // счётчик «+7» на duo-экранах считает 1 -> 7 синхронно с ростом бара
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const startCounter = (scr) => {
+      const el = scr.querySelector('.skill-num');
+      if (!el || reduced) return;
+      setTimeout(() => {
+        const t0 = performance.now();
+        const iv = setInterval(() => {
+          const p = Math.min((performance.now() - t0) / 500, 1);
+          el.textContent = '+' + (1 + Math.round(p * 6));
+          if (p >= 1) clearInterval(iv);
+        }, 60);
+      }, 1100);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in-view');
+        const duo = e.target.querySelector('.screen.duo');
+        if (duo) startCounter(duo);
+        io.unobserve(e.target);
       });
-    }
+    }, { threshold: .35 });
+    document.querySelectorAll('.case').forEach((c) => io.observe(c));
   </script>
 </body>
 </html>
