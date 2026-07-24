@@ -7,12 +7,12 @@
   <title>Introvert Test</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --case-sky-top: #F3FAFF;
       --case-sky-bottom: #E7F3FC;
-      --hero-green: linear-gradient(152.54deg, #88BD00 24.52%, #597B00 76.38%);
+      --hero-green: linear-gradient(150.39deg, #87BC01 24.42%, #577507 66.35%);
       --screen-bg: #f5f6f6;
       --ink: #282828;
     }
@@ -27,7 +27,7 @@
       overflow-x: hidden;
     }
 
-    /* ---- layout: two cases on sky backers ---- */
+    /* ---- layout: cases on sky backers ---- */
     .stage {
       position: relative;
       display: flex;
@@ -37,7 +37,6 @@
       padding: 40px 3vw;
     }
     .case {
-      /* размеры как у project-card__stage в портфолио: ~790×510, radius 24 */
       background: linear-gradient(180deg, var(--case-sky-top), var(--case-sky-bottom));
       width: min(980px, 94vw);
       height: 640px;
@@ -74,9 +73,22 @@
     .hero {
       position: absolute;
       inset: 0 0 auto 0;
-      height: 71.55%;
+      height: 73.74%;
       border-radius: 0 0 8.62cqw 8.62cqw;
       background: var(--hero-green);
+    }
+
+    .date-heading {
+      position: absolute;
+      top: 10.36%;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      text-align: center;
+      color: #fff;
+      font-size: 5.17cqw;
+      font-weight: 600;
+      letter-spacing: -.033em;
     }
 
     .cat, .fire {
@@ -84,32 +96,73 @@
       display: block;
     }
 
-    /* scene placement (design 2049:2923) */
-    .screen.happy .cat  { left: 7%; top: 19%; width: 53.6%; }
-    .screen.happy .fire { left: 49.45%; top: 27.9%; width: 35.7%; }
-    .screen.sad .cat    { left: 3.5%; top: 19.1%; width: 57%; }
-    .screen.sad .fire   { left: 50.95%; top: 25.6%; width: 35.3%; }
+    /* scene placement (design 2051:4323) */
+    .screen.happy .cat  { left: 5%;    top: 25%;    width: 53.6%; }
+    .screen.happy .fire { left: 50.97%; top: 33.46%; width: 35.7%; }
+    .screen.proud .cat  { left: 6.79%; top: 25.52%; width: 53.94%; }
+    .screen.proud .fire { left: 50.97%; top: 33.46%; width: 35.7%; }
+    .screen.sad .cat    { left: 1%;    top: 26.3%;  width: 57%; }
+    .screen.sad .fire   { left: 51.5%; top: 31.2%;  width: 35.3%; }
+
+    /* ---- speech bubble (proud) ---- */
+    .bubble {
+      position: absolute;
+      left: 54.77%;
+      top: 27.41%;
+      width: 24.14cqw;
+      z-index: 3;
+      background: #fff;
+      border-radius: 3.45cqw;
+      padding: 1.72cqw 2.59cqw;
+      color: var(--ink);
+      font-size: 2.8cqw;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: .008em;
+    }
+    .bubble-tail {
+      position: absolute;
+      left: 54.77%;
+      top: 30.23%;
+      width: 3.88cqw;
+      z-index: 2;
+    }
+    .bubble, .bubble-tail {
+      opacity: 0;
+      transform: scale(.6);
+      transform-origin: 0% 100%;
+      animation: bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) .6s forwards;
+    }
+    @keyframes bubble-in {
+      to { opacity: 1; transform: scale(1); }
+    }
 
     /* ---- result card ---- */
     .card {
       position: absolute;
       left: 3.64%;
-      top: 51.67%;
+      top: 57.53%;
       width: 92.73%;
-      height: 18.2%;
       background: #fff;
       border-radius: 6.9cqw;
       box-shadow: 0 1px 2px rgba(12, 12, 13, .05);
-      padding: 3.4cqw 3.4cqw 3cqw;
+      padding: 3.45cqw 3.45cqw 3cqw;
       color: var(--ink);
     }
-    .card .date {
-      font-size: 3.45cqw;
-      font-weight: 600;
-      letter-spacing: -.05em;
+    .screen.sad .card { height: 17.4%; }
+    .card-row {
+      display: flex;
+      gap: 2.59cqw;
+      align-items: flex-start;
+    }
+    .card-row img {
+      width: 9.48cqw;
+      height: 9.48cqw;
+      display: block;
+      flex: none;
     }
     .card .title {
-      margin: 1.1cqw 0 0;
+      margin: 0;
       font-size: 4.74cqw;
       font-weight: 700;
       line-height: 1.18;
@@ -123,7 +176,7 @@
     }
 
     /* ---- skill progress bar (Гармонизатор) ---- */
-    .skill { position: relative; margin-top: 4.5cqw; }
+    .skill { position: relative; margin-top: 2.6cqw; }
     .skill-track {
       height: 3.88cqw;
       border-radius: 1.72cqw;
@@ -139,20 +192,13 @@
     }
     .skill-num {
       position: absolute;
-      right: 5cqw;
+      right: 2cqw;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 2.59cqw;
+      font-size: 2.8cqw;
       color: #fff;
       opacity: 0;
       animation: num-in .3s ease 1.7s forwards;
-    }
-    .skill-lotus {
-      position: absolute;
-      left: calc(100% - 3.77cqw); /* центр цветка на кончике заливки */
-      top: -1.5cqw;
-      width: 7.54cqw;
-      animation: lotus-pop .45s ease 1.5s;
     }
     .plus-fly {
       position: absolute;
@@ -169,7 +215,6 @@
     }
     @keyframes skill-grow { to { width: 30.85%; } }
     @keyframes num-in { to { opacity: 1; } }
-    @keyframes lotus-pop { 40% { transform: scale(1.25); } }
     @keyframes plus-fly-in {
       to { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(1); }
     }
@@ -180,7 +225,7 @@
     /* ---- other discoveries ---- */
     .others {
       position: absolute;
-      top: 74.06%;
+      top: 75.84%;
       left: 3.45cqw;
       font-size: 3.45cqw;
       font-weight: 600;
@@ -189,7 +234,7 @@
     }
     .chips {
       position: absolute;
-      top: 77.4%;
+      top: 79.18%;
       left: 3.45cqw;
       display: flex;
       gap: 1.72cqw;
@@ -197,21 +242,19 @@
     .chip {
       background: #fff;
       border-radius: 5.17cqw;
-      padding: 3cqw 3.45cqw;
+      padding: 2.59cqw 3.45cqw;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 1.72cqw;
       box-shadow: 0 1px 2px rgba(12, 12, 13, .05);
       color: var(--ink);
-    }
-    .chip img { width: 5.17cqw; height: 5.17cqw; display: block; }
-    .chip .row {
-      display: flex;
-      gap: .86cqw;
       font-size: 3.45cqw;
+      font-weight: 500;
       letter-spacing: -.05em;
       white-space: nowrap;
     }
+    .chip img { width: 5.17cqw; height: 5.17cqw; display: block; }
+    .chip .num { margin-right: -.86cqw; }
 
     /* ---- Dynamic Island + status bar + home ---- */
     .island {
@@ -302,10 +345,12 @@
       height: 8.6cqw;
       z-index: 4;
     }
+
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
       .skill-num { opacity: 1; }
+      .bubble, .bubble-tail { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -331,26 +376,28 @@
   </svg>
 
   <main class="stage">
-    <!-- Case 1: happy result -->
+    <!-- Case 1: happy dancing cat -->
     <section class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen happy">
             <div class="hero"></div>
+            <div class="date-heading">14-20 июля</div>
             <div class="progress" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
             <img class="close" src="assets/icon-close.svg" alt="">
             <img class="cat"  src="assets/cat-happy.svg"  alt="Котик танцует у горящего костра">
             <img class="fire" src="assets/fire-happy.svg" alt="">
             <div class="card">
-              <div class="date">14-20 июля</div>
-              <p class="title">Благодаря тебе во мне <br>вырос Гармонизатор</p>
-              <p class="caption">Ты чаще всего смотрел про осознанность</p>
+              <div class="card-row">
+                <img src="assets/icon-hormonizer-card.png" alt="">
+                <div>
+                  <p class="title">Во мне больше всего вырос Гармонизатор</p>
+                  <p class="caption">Ты чаще всего смотрел про осознанность</p>
+                </div>
+              </div>
               <div class="skill">
                 <div class="skill-track">
-                  <div class="skill-fill">
-                    <span class="skill-num">+7</span>
-                    <img class="skill-lotus" src="assets/icon-hormonizer.svg" alt="">
-                  </div>
+                  <div class="skill-fill"><span class="skill-num">+7</span></div>
                 </div>
                 <span class="plus-fly">+7</span>
               </div>
@@ -359,11 +406,11 @@
             <div class="chips">
               <div class="chip">
                 <img src="assets/icon-lifehacker.png" alt="">
-                <div class="row"><span>+1</span><span>Лайфхакер</span></div>
+                <span class="num">+1</span><span>Лайфхакер</span>
               </div>
               <div class="chip">
                 <img src="assets/icon-intuit.png" alt="">
-                <div class="row"><span>+2</span><span>Интуит</span></div>
+                <span class="num">+2</span><span>Интуит</span>
               </div>
             </div>
             <div class="status" aria-hidden="true">
@@ -377,26 +424,30 @@
       </div>
     </section>
 
-    <!-- Case 2: proud, slightly dancing cat -->
+    <!-- Case 2: proud, hip-swaying cat with a speech bubble -->
     <section class="case">
       <div class="phone">
         <div class="frame">
-          <div class="screen happy proud">
+          <div class="screen proud">
             <div class="hero"></div>
+            <div class="date-heading">14-20 июля</div>
             <div class="progress" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
             <img class="close" src="assets/icon-close.svg" alt="">
-            <img class="cat"  src="assets/cat-proud.svg"  alt="Гордый котик слегка пританцовывает у костра">
+            <img class="bubble-tail" src="assets/bubble-tail.svg" alt="">
+            <div class="bubble">Благодаря тебе я расту!</div>
+            <img class="cat"  src="assets/cat-proud.svg"  alt="Гордый котик пританцовывает у костра">
             <img class="fire" src="assets/fire-happy.svg" alt="">
             <div class="card">
-              <div class="date">14-20 июля</div>
-              <p class="title">Благодаря тебе во мне <br>вырос Гармонизатор</p>
-              <p class="caption">Ты чаще всего смотрел про осознанность</p>
+              <div class="card-row">
+                <img src="assets/icon-hormonizer-card.png" alt="">
+                <div>
+                  <p class="title">Во мне больше всего вырос Гармонизатор</p>
+                  <p class="caption">Ты чаще всего смотрел про осознанность</p>
+                </div>
+              </div>
               <div class="skill">
                 <div class="skill-track">
-                  <div class="skill-fill">
-                    <span class="skill-num">+7</span>
-                    <img class="skill-lotus" src="assets/icon-hormonizer.svg" alt="">
-                  </div>
+                  <div class="skill-fill"><span class="skill-num">+7</span></div>
                 </div>
                 <span class="plus-fly">+7</span>
               </div>
@@ -405,11 +456,11 @@
             <div class="chips">
               <div class="chip">
                 <img src="assets/icon-lifehacker.png" alt="">
-                <div class="row"><span>+1</span><span>Лайфхакер</span></div>
+                <span class="num">+1</span><span>Лайфхакер</span>
               </div>
               <div class="chip">
                 <img src="assets/icon-intuit.png" alt="">
-                <div class="row"><span>+2</span><span>Интуит</span></div>
+                <span class="num">+2</span><span>Интуит</span>
               </div>
             </div>
             <div class="status" aria-hidden="true">
@@ -423,12 +474,13 @@
       </div>
     </section>
 
-    <!-- Case 3: sad result -->
+    <!-- Case 3: sad shivering cat -->
     <section class="case">
       <div class="phone">
         <div class="frame">
           <div class="screen sad">
             <div class="hero"></div>
+            <div class="date-heading">14-20 июля</div>
             <div class="progress" aria-hidden="true"><span class="active"></span></div>
             <img class="close" src="assets/icon-close.svg" alt="">
             <img class="cat"  src="assets/cat-sad.svg"  alt="Котик замёрз у потухшего костра">
