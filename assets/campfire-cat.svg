@@ -12,8 +12,6 @@
   .ear-right  { transform-origin: 121px 80px;  animation: ear-right-wiggle 1.2s ease-in-out infinite; }
   .face       { transform-origin: 93px 99px;   animation: face-bob 1.2s ease-in-out .06s infinite; }
   .mouth      { transform-origin: 92px 110px;  animation: mouth-sing .6s ease-in-out infinite alternate; }
-  .eye-r      { transform-origin: 110px 95px;  animation: blink 3.6s linear infinite; }
-  .eye-l      { transform-origin: 77px 95px;   animation: blink 3.6s linear infinite; }
   .ball       { animation: ball-bounce .6s ease-in-out -.3s infinite; }
   .flame-outer{ transform-origin: 219px 139px; animation: flicker .72s ease-in-out infinite; }
   .flame-inner{ transform-origin: 220px 129px; animation: flicker .54s ease-in-out -.2s infinite; }
@@ -67,10 +65,6 @@
   @keyframes mouth-sing {
     from { transform: scale(1, .98); }
     to   { transform: scale(1.03, 1.06); }
-  }
-  @keyframes blink {
-    0%, 92%, 96.5%, 100% { transform: scaleY(1); }
-    94%                  { transform: scaleY(.08); }
   }
   @keyframes ball-bounce {
     0%, 100% { transform: translateY(0); }
