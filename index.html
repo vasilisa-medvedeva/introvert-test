@@ -393,10 +393,10 @@
         tt-body-rise 3.2s cubic-bezier(0.34, 1.2, 0.64, 1) .5s forwards,
         tt-body-push 1.8s ease-in-out 5s infinite alternate;
     }
-    /* ножки: origin в нижней точке носка; обе уводим влево и наклоняем в одну сторону —
-       корпус тянется вправо-вверх, ноги остаются позади, как при наклоне к цели.
-       композиция отзеркалена, поэтому в записи знаки обратные экранным: rotate(10deg) = −10° на экране,
-       translateX(10px) = 10px влево */
+    /* ножки: origin в нижней точке носка, носки стоят на месте (сдвинуты на 10px влево),
+       а верх ног сильно уходит вправо, под корпус, — так читается стойка на цыпочках.
+       композиция отзеркалена, поэтому в записи знаки обратные экранным: rotate(-18deg) = +18° на экране
+       (верх вправо), translateX(10px) = 10px влево */
     .screen.tiptoe #tt-leg-left {
       transform-origin: 158px 226px;
       animation:
@@ -439,8 +439,8 @@
     /* фаза 1 */
     @keyframes tt-rise      { to { transform: translateY(-14px); } }
     @keyframes tt-body-rise { to { transform: scale(.98, 1.05); } }
-    @keyframes tt-leg-l-rise { to { transform: translate(10px, 0) rotate(10deg) scaleY(1.04); } }
-    @keyframes tt-leg-r-rise { to { transform: translate(10px, 0) rotate(10deg) scaleY(1.04); } }
+    @keyframes tt-leg-l-rise { to { transform: translate(10px, 0) rotate(-18deg) scaleY(1.04); } }
+    @keyframes tt-leg-r-rise { to { transform: translate(10px, 0) rotate(-18deg) scaleY(1.04); } }
     @keyframes tt-arm-l-rise { to { transform: rotate(22deg); } }
     @keyframes tt-arm-r-rise { to { transform: rotate(7deg); } }
     @keyframes tt-shadow-rise { to { transform: scaleX(.85); opacity: .7; } }
@@ -455,12 +455,12 @@
       to   { transform: scale(.976, 1.062); }
     }
     @keyframes tt-leg-l-push {
-      from { transform: translate(10px, 0) rotate(10deg) scaleY(1.04); }
-      to   { transform: translate(10px, 0) rotate(11.5deg) scaleY(1.05); }
+      from { transform: translate(10px, 0) rotate(-18deg) scaleY(1.04); }
+      to   { transform: translate(10px, 0) rotate(-19.5deg) scaleY(1.05); }
     }
     @keyframes tt-leg-r-push {
-      from { transform: translate(10px, 0) rotate(10deg) scaleY(1.04); }
-      to   { transform: translate(10px, 0) rotate(11.5deg) scaleY(1.05); }
+      from { transform: translate(10px, 0) rotate(-18deg) scaleY(1.04); }
+      to   { transform: translate(10px, 0) rotate(-19.5deg) scaleY(1.05); }
     }
     @keyframes tt-arm-l-push {
       from { transform: rotate(22deg); }
