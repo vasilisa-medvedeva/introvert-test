@@ -355,9 +355,10 @@
     /* глубина сцены: котик крупнее, ниже и на первом плане; костёр меньше и выше — уходит на второй план */
     .screen.tiptoe .cat  { left: 2.5%; top: 21%; width: 63%; height: auto; z-index: 2; }
     .screen.tiptoe .fire { left: 60%;  top: 31%; width: 28%; }
-    .screen.tiptoe .bubble      { left: 53.41%; top: 25.42%; width: 33.86cqw; }
-    /* хвостик сдвинут правее скруглённого угла и перекрывает низ баббла — читается пришитым */
-    .screen.tiptoe .bubble-tail { left: 55.5%; top: 29.4%; width: 5.44cqw; }
+    /* бабл берём с первого экрана: позиция, хвостик и пружинный вход — общие.
+       шире базового ровно настолько, чтобы реплика легла в две строки, как на первом экране, —
+       тогда высота плашки совпадает с базовой и хвостик остаётся пришит к нижнему левому углу */
+    .screen.tiptoe .bubble { width: 33.86cqw; }
     .screen.tiptoe .scene-texts .title   { font-size: 5cqw; }
     .screen.tiptoe .scene-texts .caption { font-size: 3.18cqw; }
     .screen.tiptoe .fire-btn { height: 10cqw; border-radius: 3.64cqw; font-size: 3.18cqw; }
@@ -365,11 +366,13 @@
     /* сам SVG только проявляется: всё движение живёт на внутренних группах,
        поэтому две анимации никогда не спорят за один transform */
     .screen.tiptoe .cat { animation: fade-in .5s ease-out .25s forwards; }
+    /* костёр на втором плане: чуть притушен и дышит медленнее котика — так глубина явнее */
     .screen.tiptoe .fire {
       transform-origin: 50% 90%;
+      filter: brightness(.95);
       animation:
         fade-in .5s ease-out .38s forwards,
-        duo-flame-idle 2.4s ease-in-out 1.3s infinite;
+        duo-flame-idle 4s ease-in-out 1.3s infinite;
     }
     /* глаза сверкают: блик вспыхивает и гаснет, правый — вразнобой с левым */
     .screen.tiptoe .cat .glint {
@@ -429,9 +432,17 @@
         tt-shadow-rise 3.2s cubic-bezier(0.34, 1.2, 0.64, 1) .5s forwards,
         tt-shadow-push 1.8s ease-in-out 5s infinite alternate;
     }
-    /* баббл проявляется медленно, без пружины: 1.8 с на fade-in и рост из 0.9 */
-    .screen.tiptoe .bubble,
-    .screen.tiptoe .bubble-tail { animation: tt-bubble-in 1.8s ease-out .3s forwards; }
+    /* реплика вспыхивает на 2-й секунде, когда подъём уже читается; вход и парение — базовые */
+    .screen.tiptoe .bubble {
+      animation:
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 2s forwards,
+        bubble-float 2.4s ease-in-out 2.75s infinite;
+    }
+    .screen.tiptoe .bubble-tail {
+      animation:
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 2s forwards,
+        tail-float 2.4s ease-in-out 2.75s infinite;
+    }
     /* тексты, карточки и кнопка — тем же каскадом, что на других экранах */
     .screen.tiptoe.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
     .screen.tiptoe.duo .fire-btn { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .84s forwards; }
@@ -473,10 +484,6 @@
     @keyframes tt-shadow-push {
       from { transform: scaleX(.85); opacity: .7; }
       to   { transform: scaleX(.8);  opacity: .64; }
-    }
-    @keyframes tt-bubble-in {
-      from { opacity: 0; transform: scale(.9); }
-      to   { opacity: 1; transform: none; }
     }
 
     /* ---- искры-звёздочки вокруг кота (только proud duo) ---- */
