@@ -435,6 +435,18 @@
         tt-shadow-rise 3.2s cubic-bezier(0.34, 1.2, 0.64, 1) .5s forwards,
         tt-shadow-push 1.8s ease-in-out 5s infinite alternate;
     }
+    /* реплика вступает на 1.5 с — сцена уже собралась, подъём читается; вход и парение базовые,
+       парение стартует через те же 0.3 с после посадки, что и на первом экране */
+    .screen.tiptoe .bubble {
+      animation:
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards,
+        bubble-float 2.4s ease-in-out 2.25s infinite;
+    }
+    .screen.tiptoe .bubble-tail {
+      animation:
+        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards,
+        tail-float 2.4s ease-in-out 2.25s infinite;
+    }
     /* тексты, карточки и кнопка — тем же каскадом, что на других экранах */
     .screen.tiptoe.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
     .screen.tiptoe.duo .fire-btn { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .84s forwards; }
