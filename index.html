@@ -359,6 +359,9 @@
        шире базового ровно настолько, чтобы реплика легла в две строки, как на первом экране, —
        тогда высота плашки совпадает с базовой и хвостик остаётся пришит к нижнему левому углу */
     .screen.tiptoe .bubble { width: 33.86cqw; }
+    /* котик здесь на первом плане (z-index 2), поэтому хвостик надо поднять над ним —
+       иначе грива закрашивает его: в разметке котик идёт позже хвостика */
+    .screen.tiptoe .bubble-tail { z-index: 3; }
     .screen.tiptoe .scene-texts .title   { font-size: 5cqw; }
     .screen.tiptoe .scene-texts .caption { font-size: 3.18cqw; }
     .screen.tiptoe .fire-btn { height: 10cqw; border-radius: 3.64cqw; font-size: 3.18cqw; }
@@ -431,17 +434,6 @@
       animation:
         tt-shadow-rise 3.2s cubic-bezier(0.34, 1.2, 0.64, 1) .5s forwards,
         tt-shadow-push 1.8s ease-in-out 5s infinite alternate;
-    }
-    /* реплика вспыхивает на 2-й секунде, когда подъём уже читается; вход и парение — базовые */
-    .screen.tiptoe .bubble {
-      animation:
-        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 2s forwards,
-        bubble-float 2.4s ease-in-out 2.75s infinite;
-    }
-    .screen.tiptoe .bubble-tail {
-      animation:
-        bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 2s forwards,
-        tail-float 2.4s ease-in-out 2.75s infinite;
     }
     /* тексты, карточки и кнопка — тем же каскадом, что на других экранах */
     .screen.tiptoe.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
