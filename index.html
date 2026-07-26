@@ -84,17 +84,30 @@
         radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, .34), rgba(255, 255, 255, 0) 62%),
         var(--case-fill, var(--tone-prod));
       width: min(1120px, 94vw);
-      height: 700px;          /* больше воздуха над телефоном и под ним */
+      /* высоту задаёт содержимое, а не фиксированные 700px: заголовок теперь внутри,
+         а вертикальные отступы взяты у финальной серой карточки — тот же ритм */
+      padding: clamp(40px, 4.6vw, 76px) clamp(20px, 3vw, 48px);
       border-radius: 24px;
-      padding: 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: clamp(20px, 4vw, 44px);
+      gap: clamp(20px, 2.6vw, 36px);
       overflow: hidden;
     }
-    /* заголовок над карточкой, цветом — тёмный оттенок её подложки */
-    .case-label { margin: 0 0 32px; text-align: center; }
+    /* заголовок и описание внутри карточки, цветом — тёмный оттенок её подложки */
+    .case-label { margin: 0; text-align: center; }
+    .case-label p {
+      margin: 14px auto 0;
+      max-width: 32em;   /* мера строки: на 1120px абзац во всю ширину не читается */
+      font-family: 'Onest', system-ui, sans-serif;
+      font-size: clamp(14px, 1.3vw, 16px);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--case-ink, var(--ink-strong));
+      opacity: .78;      /* тот же ink, что у заголовка, но тише — это подпись, не акцент */
+    }
+    .case-label p + p { margin-top: 10px; }
     .case-label h2 {
       margin: 0;
       font-family: 'Unbounded', 'Onest', sans-serif;
@@ -1293,9 +1306,6 @@
       /* телефон крупнее: 44vw давали 165px — макет внутри не читался.
          потолок 278px тот же, что на десктопе, vw страхует узкие экраны от переполнения */
       .phone { width: min(278px, 78vw); }
-      /* карточка обнимает телефон вместо фиксированных 700px, которые оставляли
-         по 176px пустоты сверху и снизу */
-      .case { height: auto; padding: 18px; }
     }
   </style>
 </head>
@@ -1404,10 +1414,12 @@
 
     <!-- Case 1: продуктивная неделя — proud, finish и «на цыпочках» -->
     <section class="case-block case--prod" id="case-productive">
-      <header class="case-label">
-        <h2>Продуктивная неделя</h2>
-      </header>
       <div class="case">
+        <header class="case-label">
+          <h2>Продуктивная неделя</h2>
+          <p>Интровертушка благодарит пользователя за неделю. Костёр и цветовая палитра продолжают механику тамагочи, связывая экран с существующей системой заботы о герое.</p>
+          <p>Показываем любимую категорию пользователя и его достижения в других темах, чтобы сделать прогресс заметнее.</p>
+        </header>
         <div class="phone">
           <div class="frame">
             <div class="stories" data-loop="loop">
@@ -1620,10 +1632,12 @@
 
     <!-- Case 2: sad — мягкий вход, пружинные карточки -->
     <section class="case-block case--quiet">
-      <header class="case-label">
-        <h2>Тихая неделя</h2>
-      </header>
       <div class="case">
+        <header class="case-label">
+          <h2>Тихая неделя</h2>
+          <p>Костёр почти потух, Интровертушка замёрз. Экран предлагает уделить приложению всего 15 минут, чтобы снова разжечь огонь.</p>
+          <p>По кнопке «Зажечь костёр» пользователь попадает к коротким лекциям и видео, которые уже начинал смотреть, но не досмотрел. По тапу на лекцию из предложенных начинаем проигрывать плеер.</p>
+        </header>
         <div class="phone">
           <div class="frame">
             <div class="stories" data-loop="once">
