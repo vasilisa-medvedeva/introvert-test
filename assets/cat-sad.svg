@@ -214,8 +214,8 @@
      потому что котик здесь крупнее макетного. Форма штриха — из Figma как есть -->
 <g class="chill chill-1"><path transform="translate(34.51,100.92) rotate(40) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
 <g class="chill chill-3"><path transform="translate(38.73,105.32) rotate(40) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-2"><path transform="translate(152.16,149.45) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-4"><path transform="translate(155.81,154.33) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
+<g class="chill chill-2"><path transform="translate(145.16,149.45) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
+<g class="chill chill-4"><path transform="translate(148.81,154.33) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
 </g>
 </g>
 </svg>
