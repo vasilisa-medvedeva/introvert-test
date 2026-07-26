@@ -7,6 +7,20 @@
   <title>Тестовое для команды интровертов — Медведева Василиса</title>
   <!-- фавикон: кружок зелёным плашки «5/6» со скрин-финиша (.stat .pill) -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#DCD0F2">
+  <!-- превью ссылки в мессенджерах. og:url и og:image обязаны быть абсолютными:
+       скрапер тянет их со своего сервера, относительный путь ему не разрешить -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Василиса Медведева">
+  <meta property="og:title" content="Концепт фичи «Наша неделя»">
+  <meta property="og:description" content="Тестовое задание для команды Art for Introvert: итог недели как история о том, что твои действия сделали с Интровертушкой.">
+  <meta property="og:url" content="https://vasilisa-medvedeva.github.io/introvert-test/">
+  <meta property="og:image" content="https://vasilisa-medvedeva.github.io/introvert-test/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Обложка: «Концепт фичи „Наша неделя“», Василиса Медведева, логотип Art for Introvert">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
@@ -17,6 +31,7 @@
       --tone-chat:  #A8E6DACC;   /* #A8E6DA — баблы, аква */
       --tone-prod:  #CBD9F7CC;   /* #CBD9F7 — продуктивная, перванш */
       --tone-quiet: #85C8E8CC;   /* #85C8E8 — тихая, голубой */
+      --tone-thanks: #DEE2DFCC;  /* #DEE2DF — финальная карточка, серый с зелёным подтоном */
       --hero-green: linear-gradient(150.39deg, #87BC01 24.42%, #577507 66.35%);
       --screen-bg: #f5f6f6;
       --ink: #282828;          /* цвет внутри макетов — как в дизайне приложения */
@@ -156,7 +171,9 @@
       margin: 0;
       align-self: flex-start;
       font-family: 'Unbounded', 'Onest', sans-serif;
-      font-size: clamp(22px, 3.9vw, 56px);
+      /* нижняя граница 32, а не 22: на телефоне clamp упирался в минимум, и заголовок
+         обложки читался как обычный абзац, хотя это титульная */
+      font-size: clamp(32px, 3.9vw, 56px);
       font-weight: 700;
       line-height: 1.06;
       letter-spacing: -.03em;
@@ -221,6 +238,62 @@
     .intro-logo    { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) .8s forwards; }
     .intro-next    { animation: fade-in .5s ease .95s forwards; }
     /* мобильная раскладка собрана одним блоком в конце стилей — см. «мобильная версия» */
+
+    /* ---- финальная карточка: спасибо и контакты ----
+       серый нейтральный тон с тем же зелёным подтоном, что у текстовых токенов
+       презентации, — не спорит ни с голубой «тихой неделей» над ней, ни с белым фоном */
+    .thanks {
+      width: min(1120px, 94vw);
+      padding: clamp(40px, 4.6vw, 76px) clamp(20px, 3vw, 48px);
+      border-radius: 28px;
+      background: var(--tone-thanks);
+      color: var(--ink-strong);
+      font-family: 'Onest', system-ui, sans-serif;
+      text-align: center;
+    }
+    .thanks h2 {
+      margin: 0;
+      font-family: 'Unbounded', 'Onest', sans-serif;
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+    }
+    .thanks p {
+      margin: 16px auto 0;
+      max-width: 30em;
+      font-size: clamp(14px, 1.3vw, 16px);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+    .thanks-links {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .thanks-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;   /* тач-таргет: на телефоне по ссылкам попадают пальцем */
+      padding: 0 26px;
+      border-radius: 100px;
+      background: #fff;
+      color: var(--ink-strong);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .12s ease-out;
+    }
+    .thanks-links a:hover  { opacity: .7; }
+    .thanks-links a:active { opacity: .5; }
+    /* проявление — тем же наблюдателем, что и баблы; сам каскад свой, нотами */
+    .thanks-reveal { opacity: 0; }
+    .thanks-reveal.is-in { animation: rise-in .5s ease-out both; }
+    .thanks-reveal:nth-child(2) { animation-delay: .1s; }
+    .thanks-reveal:nth-child(3) { animation-delay: .2s; }
 
     /* ---- iPhone mockup ---- */
     .phone {
@@ -1195,7 +1268,7 @@
       .lesson-card, .finish-texts .t1, .finish-texts .t2,
       .stat, .glow-a, .glow-b, .outro-photo, .quiet-outro .outro-gif,
       .intro h1, .intro-meta, .intro-spark, .intro-logo, .intro-next,
-      .chat-block .chat-hi, .chat-block .chat-bubble { opacity: 1; }
+      .chat-block .chat-hi, .chat-block .chat-bubble, .thanks-reveal { opacity: 1; }
       .screen.tiptoe .fire { opacity: .87; } /* второй план остаётся приглушённым и без анимации */
       .star, .finish-spark { visibility: hidden; } /* искры скрыты без анимации */
       .stories .screen { transition: none; }
@@ -1208,6 +1281,9 @@
       /* обложка занимает заметную часть первого экрана: при min-height 0 она сжималась
          в полоску 210px, и логотип со стрелкой сидели вплотную к заголовку */
       .intro { aspect-ratio: auto; min-height: 68svh; flex-direction: column; gap: 22px; padding: 28px 24px 96px; }
+      /* без flex: 1 заголовок занимает только свою высоту, и имя встаёт сразу под ним,
+         а не уезжает вниз к логотипу, растянутое колонкой */
+      .intro h1 { flex: none; }
       .intro-meta { position: static; text-align: left; font-size: 13px; }
       .intro-spark.s1 { left: 62%; top: 52%; }
       .intro-spark.s2 { left: 80%; top: 68%; }
@@ -1592,12 +1668,23 @@
       </div>
       </div>
     </section>
+
+    <!-- финальная карточка: спасибо и контакты -->
+    <section class="thanks">
+      <h2 class="thanks-reveal">Спасибо!</h2>
+      <p class="thanks-reveal">Спасибо, что дошли до конца. Буду рада обсудить фичу, ответить на вопросы и услышать, что вы сделали бы иначе.</p>
+      <div class="thanks-links thanks-reveal">
+        <a href="https://vasilisa-medvedeva.github.io/" target="_blank" rel="noopener">Портфолио</a>
+        <a href="https://t.me/vamedvedeva" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </section>
   </main>
 
   <script>
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const SEG_MS = 5000;   // длительность одного экрана
     const HOLD_MS = 200;   // после этого удержание считается паузой, а не тапом
+    const SWIPE_PX = 40;   // короче — это дрожание пальца на тапе, а не свайп
     const TICK_START = 1050; // старт тиков — сразу после появления числа (num-in на 1s)
     const TICK_MS = 90;      // шаг между +1
     const SKILL_FROM = 25.5, SKILL_TO = 30.85, TICKS = 7;
@@ -1749,10 +1836,16 @@
         arm();
       }
 
-      // тап по половинкам, удержание — пауза
-      let holdTimer = 0, held = false;
-      root.addEventListener('pointerdown', () => {
+      // тап по половинкам, свайп вбок, удержание — пауза
+      let holdTimer = 0, held = false, sx = 0, sy = 0;
+      // вперёд с последнего экрана возвращаемся в начало, назад с первого — играем его
+      // заново, а не уводим в конец флоу
+      const next = () => show(idx + 1 < screens.length ? idx + 1 : 0);
+      const prev = () => show(Math.max(idx - 1, 0));
+      root.addEventListener('pointerdown', (e) => {
         held = false;
+        sx = e.clientX;
+        sy = e.clientY;
         holdTimer = setTimeout(() => {
           held = true;
           root.classList.add('is-held');
@@ -1761,6 +1854,15 @@
       });
       const release = (e) => {
         clearTimeout(holdTimer);
+        const dx = e.clientX - sx, dy = e.clientY - sy;
+        // свайп важнее удержания: палец успевает задержаться перед движением, и без этой
+        // проверки жест уходил бы в «снять паузу». Вертикальный жест — это скролл страницы,
+        // его отдаём браузеру: он придёт pointercancel'ом
+        if (Math.abs(dx) >= SWIPE_PX && Math.abs(dx) > Math.abs(dy)) {
+          if (held) { held = false; root.classList.remove('is-held'); }
+          if (dx < 0) next(); else prev();
+          return;
+        }
         if (held) {
           held = false;
           root.classList.remove('is-held');
@@ -1768,11 +1870,7 @@
           return;
         }
         const r = root.getBoundingClientRect();
-        const forward = e.clientX - r.left > r.width / 2;
-        // назад с первого экрана не уводим в конец флоу — просто играем его заново,
-        // вперёд с последнего возвращаемся в начало
-        if (forward) show(idx + 1 < screens.length ? idx + 1 : 0);
-        else         show(Math.max(idx - 1, 0));
+        if (e.clientX - r.left > r.width / 2) next(); else prev();
       };
       root.addEventListener('pointerup', release);
       root.addEventListener('pointercancel', () => {
@@ -1821,8 +1919,8 @@
     }, { threshold: .35 });
     document.querySelectorAll('.case').forEach((c) => io.observe(c));
 
-    // баблы: каждый проявляется сам, когда доходит до кадра при прокрутке
-    const chatItems = [...document.querySelectorAll('.chat-col > *')];
+    // баблы и финальная карточка: каждый элемент проявляется сам, когда доходит до кадра
+    const chatItems = [...document.querySelectorAll('.chat-col > *, .thanks-reveal')];
     const chatIO = new IntersectionObserver((entries) => {
       ioFired = true;
       entries.forEach((e) => {
