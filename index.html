@@ -220,13 +220,7 @@
     .intro-spark.s2 { animation: chip-pop .45s cubic-bezier(.34, 1.56, .64, 1) .74s forwards; }
     .intro-logo    { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) .8s forwards; }
     .intro-next    { animation: fade-in .5s ease .95s forwards; }
-    @media (max-width: 720px) {
-      .intro { aspect-ratio: auto; min-height: 0; flex-direction: column; gap: 22px; padding: 28px 24px 96px; }
-      .intro-meta { position: static; text-align: left; font-size: 13px; }
-      .intro-spark.s1 { left: 62%; top: 52%; }
-      .intro-spark.s2 { left: 80%; top: 68%; }
-      .intro-spark.s3 { display: none; }
-    }
+    /* мобильная раскладка собрана одним блоком в конце стилей — см. «мобильная версия» */
 
     /* ---- iPhone mockup ---- */
     .phone {
@@ -1205,6 +1199,27 @@
       .screen.tiptoe .fire { opacity: .87; } /* второй план остаётся приглушённым и без анимации */
       .star, .finish-spark { visibility: hidden; } /* искры скрыты без анимации */
       .stories .screen { transition: none; }
+    }
+
+    /* ---- мобильная версия ----
+       блок стоит последним намеренно: правила .phone и .case объявлены выше, а
+       специфичность у них та же, поэтому побеждает то, что идёт ниже по файлу */
+    @media (max-width: 720px) {
+      /* обложка занимает заметную часть первого экрана: при min-height 0 она сжималась
+         в полоску 210px, и логотип со стрелкой сидели вплотную к заголовку */
+      .intro { aspect-ratio: auto; min-height: 68svh; flex-direction: column; gap: 22px; padding: 28px 24px 96px; }
+      .intro-meta { position: static; text-align: left; font-size: 13px; }
+      .intro-spark.s1 { left: 62%; top: 52%; }
+      .intro-spark.s2 { left: 80%; top: 68%; }
+      .intro-spark.s3 { display: none; }
+      /* блоки ближе друг к другу; нижний отступ страницы держим равным просвету между ними */
+      .stage { gap: 56px; padding: 24px 3vw 56px; }
+      /* телефон крупнее: 44vw давали 165px — макет внутри не читался.
+         потолок 278px тот же, что на десктопе, vw страхует узкие экраны от переполнения */
+      .phone { width: min(278px, 78vw); }
+      /* карточка обнимает телефон вместо фиксированных 700px, которые оставляли
+         по 176px пустоты сверху и снизу */
+      .case { height: auto; padding: 18px; }
     }
   </style>
 </head>
