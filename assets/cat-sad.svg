@@ -21,6 +21,7 @@
   .chill      { opacity: 0; animation: chill-shake 4s linear infinite; }
   .chill-2    { animation-delay: .06s; }
   .chill-3    { animation-delay: .12s; }
+  .chill-4    { animation-delay: .18s; }
   .pit-ember  { animation: pit-glow 2.2s ease-in-out infinite; }
   .pe-2       { animation-delay: -.7s; animation-duration: 2.6s; }
   .pe-3       { animation-delay: -1.4s; animation-duration: 1.9s; }
@@ -125,19 +126,20 @@
     50%      { opacity: .95; }
   }
   @keyframes chill-shake {
+    /* пик — 1: сама прозрачность 0.7 сидит в stroke-opacity штриха, как в макете */
     0%, 56%, 84%, 100% { opacity: 0; transform: translateX(0); }
-    60% { opacity: .85; transform: translateX(-2px); }
-    63% { opacity: .85; transform: translateX(2px); }
-    66% { opacity: .85; transform: translateX(-2px); }
-    69% { opacity: .85; transform: translateX(2px); }
-    72% { opacity: .8;  transform: translateX(-1.6px); }
-    75% { opacity: .75; transform: translateX(1.2px); }
-    78% { opacity: .6;  transform: translateX(-.8px); }
-    81% { opacity: .35; transform: translateX(.4px); }
+    60% { opacity: 1;   transform: translateX(-2px); }
+    63% { opacity: 1;   transform: translateX(2px); }
+    66% { opacity: 1;   transform: translateX(-2px); }
+    69% { opacity: 1;   transform: translateX(2px); }
+    72% { opacity: .94; transform: translateX(-1.6px); }
+    75% { opacity: .88; transform: translateX(1.2px); }
+    78% { opacity: .71; transform: translateX(-.8px); }
+    81% { opacity: .41; transform: translateX(.4px); }
   }
 </style>
 <g class="shadow">
-<ellipse cx="46.5" cy="163.717" rx="46.5" ry="11.5" fill="#597B01" fill-opacity="0.9"/>
+<ellipse cx="46.5" cy="163.717" rx="46.5" ry="11.5" fill="#6C9203" fill-opacity="0.5"/>
 </g>
 <g class="cat">
 <g class="shiver">
@@ -207,12 +209,13 @@
 </g>
 <path d="M57.8214 97.6967C57.1279 69.7137 79.0522 46.4534 106.768 45.7711C111.977 45.6163 117.021 46.2591 121.793 47.5845L130.577 76.1589C124.883 69.8262 116.55 65.9424 107.373 66.2128C90.8072 66.702 77.7766 80.5284 78.2661 97.0916C78.4593 103.599 80.7139 109.553 84.3806 114.364L57.899 99.0727C57.874 98.6129 57.8367 98.1574 57.824 97.6965L57.8214 97.6967Z" fill="#E6A500"/>
 <path d="M84.3714 114.358C90.0363 121.811 99.0931 126.511 109.163 126.213C125.729 125.724 138.759 111.898 138.27 95.3343C138.052 87.9339 135.168 81.2386 130.57 76.1381L121.796 47.5934C142.543 53.3541 158.042 72.0763 158.712 94.7293C159.534 122.584 137.621 145.833 109.766 146.657C82.3653 147.467 59.4221 126.275 57.897 99.0714L84.3688 114.358L84.3714 114.358Z" fill="#FFDB3C"/>
-<g class="chill chill-1"><path transform="translate(42,70) rotate(-15)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-2"><path transform="translate(34,92) rotate(-8)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-3"><path transform="translate(30,112) rotate(-18)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-2"><path transform="translate(174,66) rotate(15)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-1"><path transform="translate(181,88) rotate(8)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
-<g class="chill chill-3"><path transform="translate(185,104) rotate(12)" d="M0 0 Q3 2.5 0 5 Q-3 7.5 0 10 Q3 12.5 0 15" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></g>
+<!-- дрожь по макету 2051:5004 (векторы 2080:164–169): две пары штрихов — у левого плеча
+     и у правой задней лапы. Координаты пересчитаны из макета через центр тени,
+     потому что котик здесь крупнее макетного. Форма штриха — из Figma как есть -->
+<g class="chill chill-1"><path transform="translate(34.51,100.92) rotate(40) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
+<g class="chill chill-3"><path transform="translate(38.73,105.32) rotate(40) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
+<g class="chill chill-2"><path transform="translate(152.16,149.45) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
+<g class="chill chill-4"><path transform="translate(155.81,154.33) rotate(45) scale(.7) translate(-4.33,-11.25)" d="M5.73892 1C6.73892 2 8.43892 4.4 7.23892 6C5.73892 8 -0.261076 10 1.23892 13C2.73892 16 6.23901 17.5 3.73897 21.5" stroke="white" stroke-opacity="0.7" stroke-width="2.3" stroke-linecap="round" fill="none"/></g>
 </g>
 </g>
 </svg>

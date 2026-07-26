@@ -4,22 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Introvert Test</title>
+  <title>Тестовое для команды интровертов — Медведева Василиса</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --case-bg-top: #F7F8F9;
-      --case-bg-bottom: #E8EAEC;
+      /* палитра «Морская прохлада» — по блокам сверху вниз, все на 80% */
+      --tone-title: #DCD0F2CC;   /* #DCD0F2 — титульный, лаванда */
+      --tone-chat:  #A8E6DACC;   /* #A8E6DA — баблы, аква */
+      --tone-prod:  #CBD9F7CC;   /* #CBD9F7 — продуктивная, перванш */
+      --tone-quiet: #85C8E8CC;   /* #85C8E8 — тихая, голубой */
       --hero-green: linear-gradient(150.39deg, #87BC01 24.42%, #577507 66.35%);
       --screen-bg: #f5f6f6;
-      --ink: #282828;
+      --ink: #282828;          /* цвет внутри макетов — как в дизайне приложения */
+
+      /* текст самой презентации: мягкий графит с зелёным подтоном вместо чёрного */
+      --ink-strong: #2E3330;   /* заголовки и основной текст */
+      --ink-soft:   #6B716C;   /* описания под заголовком */
+      --ink-muted:  #9AA09B;   /* служебные подписи */
+      --ink-title:  #372B50;   /* тёмная лаванда — текст на лавандовом титульном */
+
+      /* нежные заливки для разделов и карточек */
+      --tint-lime:     #E9F2CE;
+      --tint-mint:     #D9EEE2;
+      --tint-sky:      #D8E6F6;
+      --tint-lavender: #E4DDF4;
+      --tint-peach:    #FBDDD1;
+      --tint-vanilla:  #FCEBBF;
+      --acc-lime:     #6CA600;
+      --acc-mint:     #2E9E77;
+      --acc-sky:      #3B7FC4;
+      --acc-lavender: #7B62C7;
+      --acc-peach:    #D9694A;
+      --acc-vanilla:  #C99400;
     }
 
     * { box-sizing: border-box; }
 
     html, body { margin: 0; padding: 0; min-height: 100svh; }
+    /* переход по стрелке — плавный, чтобы баблы успели проявиться по дороге */
+    html { scroll-behavior: smooth; }
 
     body {
       background: #fff;
@@ -32,17 +57,17 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 180px;
+      gap: 120px;
       align-items: center;
-      padding: 40px 3vw;
+      padding: 40px 3vw 120px;   /* после последнего блока — столько же, сколько между блоками */
     }
     .case {
-      /* мягкий серый подклад: лёгкий свет сверху + нежный вертикальный градиент */
+      /* цвет блока из палитры + лёгкий свет сверху, чтобы макет не сливался с подложкой */
       background:
-        radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 62%),
-        linear-gradient(165deg, var(--case-bg-top), var(--case-bg-bottom));
-      width: min(980px, 94vw);
-      height: 640px;
+        radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, .34), rgba(255, 255, 255, 0) 62%),
+        var(--case-fill, var(--tone-prod));
+      width: min(1120px, 94vw);
+      height: 700px;          /* больше воздуха над телефоном и под ним */
       border-radius: 24px;
       padding: 24px;
       display: flex;
@@ -51,27 +76,154 @@
       gap: clamp(20px, 4vw, 44px);
       overflow: hidden;
     }
-
-    .case-block { width: min(980px, 94vw); }
-    .case-block .case { width: 100%; }
-    /* блок текста прижат к левому краю карточки, строки — влево */
-    .case-label {
-      margin: 0 0 32px;
-      font-family: 'Onest', system-ui, sans-serif;
-      color: #282828;
-      text-align: left;
-    }
+    /* заголовок над карточкой, цветом — тёмный оттенок её подложки */
+    .case-label { margin: 0 0 32px; text-align: center; }
     .case-label h2 {
       margin: 0;
-      font-size: 44px;
+      font-family: 'Unbounded', 'Onest', sans-serif;
+      font-size: clamp(24px, 3.2vw, 40px);
       font-weight: 700;
-      letter-spacing: -.01em;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      color: var(--case-ink, var(--ink-strong));
     }
-    .case-label p {
-      margin: 16px 0 0;
-      font-size: 15px;
-      line-height: 1.45;
-      max-width: 640px;
+
+    .case--prod  { --case-fill: var(--tone-prod);  --case-ink: #2A3452; }
+    .case--quiet { --case-fill: var(--tone-quiet); --case-ink: #173B4F; }
+
+    .case-block { width: min(1120px, 94vw); }
+    .case-block .case { width: 100%; }
+
+    /* ---- блок с баблами: подводка к решению (design 2014:1991) ----
+       появление — как в чате Pyroblast: бабл вырастает от нижнего левого угла */
+    .chat-block {
+      width: min(1120px, 94vw);
+      padding: clamp(28px, 3.4vw, 56px) clamp(20px, 3vw, 48px);
+      border-radius: 28px;
+      background: var(--tone-chat);
+      font-family: 'Onest', system-ui, sans-serif;
+    }
+    .chat-col { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+    .chat-hi { display: flex; align-items: center; }
+    .chat-ava { position: relative; width: 48px; height: 48px; flex: none; border-radius: 100px; overflow: hidden; }
+    /* кадрирование фото — из макета: 129% × 172% со сдвигом влево и вверх */
+    .chat-ava img { position: absolute; left: -9.59%; top: -33.32%; width: 129.17%; height: 172.22%; max-width: none; }
+    .chat-hi .who { padding: 12px; color: #1F4A40; }   /* тёмный оттенок аквы */
+    .chat-hi .who b { display: block; font-size: 16px; font-weight: 600; line-height: 15px; }
+    .chat-hi .who span { display: block; margin-top: 4px; font-size: 12px; line-height: 13px; letter-spacing: .12px; opacity: .6; }
+    .chat-bubble {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px;
+      border-radius: 32px;
+      background: #fff;
+      color: #282828;
+    }
+    .chat-bubble h3 { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.2; }
+    .chat-bubble.lead h3 { font-size: 18px; }
+    .chat-bubble p { margin: 0; font-size: 14px; font-weight: 300; line-height: 1.45; }
+    .chat-bubble p + p { margin-top: 8px; }
+    .chat-bubble b { font-weight: 600; }
+    /* каждый бабл ждёт своей очереди: проявляется, когда доходит до кадра при прокрутке */
+    .chat-block .chat-hi, .chat-block .chat-bubble { transform-origin: bottom left; opacity: 0; }
+    .chat-col > .is-in { animation: bubble-reveal .3s cubic-bezier(.2, 0, 0, 1) both; }
+    @keyframes bubble-reveal {
+      0%   { transform: scale(.6); opacity: 0; }
+      25%  { opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ---- титульный слайд: крупный заголовок слева, выходные данные справа ---- */
+    .intro {
+      position: relative;
+      width: min(1120px, 94vw);
+      aspect-ratio: 16 / 9;
+      min-height: 400px;
+      display: flex;
+      gap: clamp(20px, 4vw, 64px);
+      padding: clamp(26px, 3.4vw, 54px);
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--tone-title);
+      color: var(--ink-title);
+      font-family: 'Onest', system-ui, sans-serif;
+    }
+    .intro h1 {
+      flex: 1;
+      margin: 0;
+      align-self: flex-start;
+      font-family: 'Unbounded', 'Onest', sans-serif;
+      font-size: clamp(22px, 3.9vw, 56px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+    }
+    .intro-meta {
+      /* имя сидит на оси кнопки-стрелки: тот же отступ от края, что и у неё */
+      position: absolute;
+      top: clamp(22px, 3vw, 44px);
+      right: clamp(22px, 3vw, 44px);
+      text-align: right;
+      font-size: clamp(11px, 1.05vw, 15px);
+      line-height: 1.35;
+    }
+    .intro-meta p { margin: 0; }
+    .intro-meta .who { font-weight: 600; }
+    /* россыпь искр — тот же спарк, что и на экране «продуктивной недели» */
+    .intro-spark { position: absolute; z-index: 1; }
+    .intro-spark.s1 { left: 57%; top: 46%;  width: clamp(32px, 4.6vw, 64px); }
+    .intro-spark.s2 { left: 79%; top: 64%;  width: clamp(26px, 3.7vw, 52px); }
+    .intro-spark.s3 { left: 36%; top: 71%;  width: clamp(29px, 4.1vw, 58px); }
+    .intro-logo {
+      position: absolute;
+      left: clamp(26px, 3.4vw, 54px);
+      bottom: clamp(22px, 3vw, 44px);
+      z-index: 2;
+      display: block;
+      width: clamp(132px, 15vw, 208px);
+      height: auto;
+    }
+    .intro-next {
+      position: absolute;
+      right: clamp(22px, 3vw, 44px);
+      bottom: clamp(22px, 3vw, 44px);
+      z-index: 2;
+      width: clamp(44px, 4.6vw, 64px);
+      height: clamp(44px, 4.6vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--ink-title);
+      font-size: clamp(18px, 1.9vw, 26px);
+      text-decoration: none;
+      transition: opacity .12s ease-out;
+    }
+    .intro-next:hover  { opacity: .7; }
+    .intro-next:active { opacity: .5; }
+    .intro-next span { display: block; animation: scroll-nudge 1.8s ease-in-out infinite; }
+    @keyframes scroll-nudge {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(3px); }
+    }
+    /* вход: заголовок, выходные данные, искры, маскот */
+    .intro h1, .intro-meta, .intro-spark, .intro-logo, .intro-next { opacity: 0; }
+    .intro h1      { animation: rise-in .55s ease-out .1s forwards; }
+    .intro-meta    { animation: rise-in .55s ease-out .28s forwards; }
+    .intro-spark.s1 { animation: chip-pop .45s cubic-bezier(.34, 1.56, .64, 1) .5s forwards; }
+    .intro-spark.s3 { animation: chip-pop .45s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
+    .intro-spark.s2 { animation: chip-pop .45s cubic-bezier(.34, 1.56, .64, 1) .74s forwards; }
+    .intro-logo    { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) .8s forwards; }
+    .intro-next    { animation: fade-in .5s ease .95s forwards; }
+    @media (max-width: 720px) {
+      .intro { aspect-ratio: auto; min-height: 0; flex-direction: column; gap: 22px; padding: 28px 24px 96px; }
+      .intro-meta { position: static; text-align: left; font-size: 13px; }
+      .intro-spark.s1 { left: 62%; top: 52%; }
+      .intro-spark.s2 { left: 80%; top: 68%; }
+      .intro-spark.s3 { display: none; }
     }
 
     /* ---- iPhone mockup ---- */
@@ -102,6 +254,16 @@
       height: 73.74%;
       border-radius: 0 0 8.62cqw 8.62cqw;
       background: var(--hero-green);
+      overflow: hidden;   /* волны обрезаются по скруглению плашки */
+    }
+    /* мягкие волны поверх градиента и под иллюстрацией */
+    .hero-waves {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
     }
 
     .date-heading {
@@ -167,15 +329,39 @@
     .screen.sad.duo .cat  { animation: duo-soft-in .45s ease-out .25s forwards; }
     .screen.sad.duo .fire { animation: duo-soft-in .45s ease-out .25s forwards; }
     .screen.duo .card { animation: duo-card-in .45s cubic-bezier(.34, 1.56, .64, 1) .65s forwards; }
-    /* «Другие открытия недели» и чипы выезжают одним блоком: 0.90 → 1.30s */
-    .screen.duo .others,
-    .screen.duo .chips .chip { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .9s forwards; }
-    /* и только когда блок долетел (1.30s), стартуют счётчик и рост бара */
-    .screen.duo .skill-fill { animation-delay: 1.4s; } /* бар и счётчик стартуют вместе */
-    .screen.duo .skill-num  { animation: num-in .15s ease 1.4s forwards; }
-    /* карточки курсов — тоже единым блоком */
-    .screen.sad.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
-    .screen.sad.duo .fire-btn { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .84s forwards; }
+    /* тики бара: 1.05 → 1.59s, блик ~1.73s; на блике одним блоком
+       подпрыгивают заголовок «Другие открытия недели» и чипы */
+    .screen.duo .others { animation: chip-bounce .45s cubic-bezier(.34, 1.56, .64, 1) 1.8s forwards; }
+    .screen.duo .chips .chip:first-child { animation: chip-bounce .45s cubic-bezier(.34, 1.56, .64, 1) 1.88s forwards; }
+    .screen.duo .chips .chip:last-child  { animation: chip-bounce .45s cubic-bezier(.34, 1.56, .64, 1) 1.96s forwards; }
+    .screen.duo .skill-num { animation: num-in .15s ease 1s forwards; }
+    @keyframes chip-bounce {
+      0%   { opacity: 0; transform: scale(.7) translateY(1.4cqw); }
+      60%  { opacity: 1; transform: scale(1.06) translateY(0); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    /* низ курс-экранов (тихая неделя и «на цыпочках») входит нотами:
+       заголовок → подпись → карточки по одной → кнопка последней */
+    .screen.sad.duo .scene-texts, .screen.tiptoe.duo .scene-texts,
+    .screen.sad.duo .course-cards, .screen.tiptoe.duo .course-cards { opacity: 1; animation: none; }
+    .screen.sad.duo .scene-texts .title,   .screen.tiptoe.duo .scene-texts .title,
+    .screen.sad.duo .scene-texts .caption, .screen.tiptoe.duo .scene-texts .caption,
+    .screen.sad.duo .course-cards img,     .screen.tiptoe.duo .course-cards img { opacity: 0; }
+    .screen.sad.duo .scene-texts .title,
+    .screen.tiptoe.duo .scene-texts .title   { animation: pop-rise .45s cubic-bezier(.34, 1.56, .64, 1) .48s forwards; }
+    .screen.sad.duo .scene-texts .caption,
+    .screen.tiptoe.duo .scene-texts .caption { animation: rise-in .4s ease-out .58s forwards; }
+    .screen.sad.duo .course-cards .c1,
+    .screen.tiptoe.duo .course-cards .c1 { animation: card-in .5s cubic-bezier(.34, 1.56, .64, 1) .68s forwards; }
+    .screen.sad.duo .course-cards .c2,
+    .screen.tiptoe.duo .course-cards .c2 { animation: card-in .5s cubic-bezier(.34, 1.56, .64, 1) .8s forwards; }
+    .screen.sad.duo .fire-btn,
+    .screen.tiptoe.duo .fire-btn { animation: chip-bounce .45s cubic-bezier(.34, 1.56, .64, 1) .98s forwards; }
+    @keyframes card-in {
+      0%   { opacity: 0; transform: translateY(3cqw) scale(.92); }
+      65%  { opacity: 1; transform: translateY(0) scale(1.02); }
+      100% { opacity: 1; transform: none; }
+    }
 
     @keyframes duo-cat-in {
       from { opacity: 0; transform: translateY(2.6cqw) scale(.6); }
@@ -336,9 +522,7 @@
         bubble-in .45s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards,
         tail-float 2.4s ease-in-out 2.25s infinite;
     }
-    /* тексты, карточки и кнопка — тем же каскадом, что на других экранах */
-    .screen.tiptoe.duo .course-cards { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .62s forwards; }
-    .screen.tiptoe.duo .fire-btn { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) .84s forwards; }
+    /* тексты, карточки и кнопка — общий каскад курс-экранов, правила выше у duo-блока */
 
     /* костёр проявляется не до конца — 87% отправляют его в воздушную перспективу */
     @keyframes tt-fire-in { to { opacity: .87; } }
@@ -425,6 +609,10 @@
     .screen.sad .fire   { left: 51.4%; top: 28.3%;  width: 39.6%; }
 
     /* sad screen (design 2051:5004): высокий градиент, тексты и карточки курсов */
+    /* 10 с вместо базовых 5: на экране заголовок, подпись, две карточки курса и кнопка —
+       за 5 с это не прочитывается. Сцена не простаивает: котик дрожит и обнимает себя
+       (цикл 4 с внутри cat-sad.svg), угли и искры живут своими циклами, реплика парит. */
+    .screen.sad { --seg-ms: 10000ms; }
     .screen.sad .hero {
       height: 86.82%;
       border-radius: 0 0 0 6.9cqw; /* в макете скруглён только левый нижний угол */
@@ -542,9 +730,20 @@
     .lesson-card .l-dur { margin: 1.29cqw 0 0; font-size: 2.8cqw; color: #AAA; letter-spacing: -.06em; }
     .finish-texts { position: absolute; left: 3.45cqw; top: 60.56%; color: #282828; z-index: 2; }
     .finish-texts .t1 { margin: 0; font-size: 3.45cqw; letter-spacing: -.05em; }
-    .finish-texts .t2 { margin: 0; font-size: 6.9cqw; font-weight: 600; line-height: 1.125; letter-spacing: -.025em; }
+    .finish-texts .t2 { position: relative; margin: 0; font-size: 6.9cqw; font-weight: 600; line-height: 1.125; letter-spacing: -.025em; }
+    /* искра у восклицательного знака: вспыхивает один раз, когда строка приземлилась */
+    .finish-spark {
+      position: absolute;
+      right: -4.7cqw;
+      top: -2cqw;
+      width: 4cqw;
+      opacity: 0;
+      animation: star-pop .55s ease-out 1.35s forwards;
+    }
     .stat { position: absolute; left: 3.45cqw; top: 68.93%; display: flex; gap: 1.72cqw; align-items: center; z-index: 2; }
     .stat .pill {
+      position: relative;
+      overflow: hidden;   /* блик не выходит за скругление */
       width: 12.28cqw;
       height: 6.9cqw;
       display: flex;
@@ -556,16 +755,36 @@
       font-size: 3.64cqw;
       font-weight: 500;
       letter-spacing: -.037em;
+      font-variant-numeric: tabular-nums; /* счёт не прыгает по ширине */
     }
+    /* тики 1/6…5/6 — пульс пилюли на каждом счёте и финальный блик, как у бара Гармонизатора */
+    .stat .pill.is-tick { animation: pill-tick .18s ease-out; }
+    @keyframes pill-tick { 50% { transform: scale(1.12); } }
+    .stat .pill::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 45%;
+      background: linear-gradient(105deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0));
+      transform: translateX(-130%);
+    }
+    .stat.is-shine .pill::after { animation: shine-sweep .5s ease-out forwards; }
     .stat p { margin: 0; width: 28.9cqw; font-size: 2.8cqw; line-height: 1.23; color: #000; letter-spacing: -.046em; }
 
-    /* появление и «дыхание» finish-экрана; бейдж «Пройдено» вылетает вместе с карточкой */
+    /* появление и «дыхание» finish-экрана; бейдж «Пройдено» — часть карточки, входит с ней */
     .lesson-card, .finish-texts .t1, .finish-texts .t2, .stat, .glow-a, .glow-b { opacity: 0; }
     .glow-a { animation: glow-in 1s ease .2s forwards, glow-drift 6s ease-in-out 1.2s infinite alternate; }
     .glow-b { animation: glow-in 1s ease .35s forwards, glow-drift 6s ease-in-out 4.2s infinite alternate; }
     .lesson-card { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) .3s forwards; }
     .finish-texts .t1 { animation: rise-in .45s ease-out .9s forwards; }
-    .finish-texts .t2 { animation: pop-rise .5s cubic-bezier(.34, 1.56, .64, 1) 1s forwards; }
+    /* «и всё-таки досмотрел!» — вход с выраженным проскоком */
+    .finish-texts .t2 { animation: pop-emph .55s cubic-bezier(.2, 0, 0, 1) 1s forwards; }
+    @keyframes pop-emph {
+      0%   { opacity: 0; transform: translateY(2.6cqw) scale(.8); }
+      60%  { opacity: 1; transform: translateY(0) scale(1.06); }
+      80%  { transform: scale(.98); }
+      100% { opacity: 1; transform: none; }
+    }
     .stat { animation: chip-pop .4s cubic-bezier(.34, 1.56, .64, 1) 1.2s forwards; }
     @keyframes pop-rise {
       from { opacity: 0; transform: translateY(2.6cqw) scale(.85); }
@@ -576,6 +795,80 @@
       from { opacity: 1; transform: scale(1); }
       to   { opacity: .75; transform: scale(1.06); }
     }
+
+    /* ---- финальный экран прототипа (design 2075:2065) ---- */
+    .screen.outro { background: #fff; }
+    /* фон белый — перекрашиваем статус-бар на корпусе, как на finish */
+    .stories:has(.screen.outro.is-active) .status { color: #090909; }
+    .stories:has(.screen.outro.is-active) .status svg { filter: brightness(0); }
+    .outro-photo {
+      position: absolute;
+      left: 5.82cqw;      /* 27px макета */
+      top: 16.63%;        /* 159px */
+      width: 83.17cqw;    /* 386px */
+      height: 116.13cqw;  /* 539px */
+      z-index: 2;
+      overflow: hidden;
+    }
+    .outro-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    /* подписи-плашки лежат на фото координатами макета (в % от 386×539) */
+    .outro-cap {
+      position: absolute;
+      height: 10.02%;           /* 54px */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020202;
+      color: #fff;
+      font-size: 3.45cqw;       /* 16px */
+      font-weight: 600;
+      line-height: 1.125;       /* 18px */
+      letter-spacing: .006em;   /* .1px */
+      text-align: center;
+    }
+    /* ширина текстового блока — из макета, чтобы строки ломались так же */
+    .outro-cap.c1 { left: 30.57%; top: 3.34%;  width: 35.23%; }
+    .outro-cap.c1 span { width: 26.07cqw; }  /* 121px */
+    .outro-cap.c2 { left: 43.26%; top: 25.79%; width: 37.31%; }
+    .outro-cap.c2 span { width: 24.35cqw; }  /* 113px */
+    .outro-cap.c3 { left: 3.11%;  top: 73.1%;  width: 43.01%; font-size: 3.23cqw; line-height: 1; }
+    .outro-cap.c3 span { width: 28.66cqw; }  /* 133px */
+    .outro-cap.c4 { left: 43.26%; top: 87.94%; width: 51.04%; font-size: 3.23cqw; line-height: 1.2; }
+    .outro-cap.c4 span { width: 40.72cqw; }  /* 189px */
+    /* слот держит позицию и играет вход, кнопка внутри — состояния наведения */
+    .outro-btn-slot {
+      position: absolute;
+      left: 5.82cqw;      /* 27px */
+      top: 79.29%;        /* 758px */
+      width: 83.17cqw;    /* 386px */
+      height: 12.93cqw;   /* 60px */
+      z-index: 3;
+    }
+    .outro-btn {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 2.59cqw;  /* 12px */
+      background: #020202;
+      color: rgba(255, 255, 255, .9);
+      font-family: inherit;
+      font-size: 3.88cqw;      /* 18px */
+      font-weight: 600;
+      letter-spacing: .006em;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      transition: opacity .12s ease-out;
+    }
+    .outro-btn:hover  { opacity: .7; }
+    .outro-btn:active { opacity: .5; }
+    /* экраны не ловят события — тапы разбирает контейнер, кнопке возвращаем клики */
+    .screen.outro.is-active .outro-btn { pointer-events: auto; }
+    /* фото с подписями появляется целиком; кнопка видна сразу, без входа */
+    .outro-photo { opacity: 0; animation: fade-in .5s ease-out .1s forwards; }
 
     /* ---- speech bubble (proud) ---- */
     .bubble {
@@ -673,14 +966,30 @@
       border-radius: 1.72cqw;
       background: #EEE;
     }
+    /* бар растёт ступеньками +1…+7 (Duolingo-тики): ширину двигает счётчик в JS,
+       каждый шаг сглажен короткой transition и отбит пульсом заливки */
     .skill-fill {
       position: relative;
+      overflow: hidden;   /* блик не выходит за скругление */
       height: 100%;
       width: 25.5%; /* стартовая ширина, вырастет до 30.85% (+7) */
       border-radius: inherit;
-      background: #5A7C01;
-      animation: skill-grow .5s cubic-bezier(.34, 1.56, .64, 1) 1.5s forwards;
+      background: #6CA600;
+      transition: width .14s cubic-bezier(.2, 0, 0, 1);
     }
+    .skill-fill.is-tick { animation: tick-pulse .18s ease-out; }
+    @keyframes tick-pulse { 50% { transform: scaleY(1.18); } }
+    /* финальный блик по заполненному бару */
+    .skill-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 45%;
+      background: linear-gradient(105deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0));
+      transform: translateX(-130%);
+    }
+    .skill.is-shine .skill-fill::after { animation: shine-sweep .5s ease-out forwards; }
+    @keyframes shine-sweep { to { transform: translateX(320%); } }
     .skill-num {
       position: absolute;
       right: 2cqw;
@@ -690,9 +999,8 @@
       color: #fff;
       opacity: 0;
       font-variant-numeric: tabular-nums; /* цифры счётчика не прыгают по ширине */
-      animation: num-in .3s ease 1.05s forwards;
+      animation: num-in .3s ease 1s forwards;
     }
-    @keyframes skill-grow { to { width: 30.85%; } }
     @keyframes num-in { to { opacity: 1; } }
 
     /* ---- other discoveries ---- */
@@ -852,6 +1160,21 @@
     /* мгновенный сброс каскада при переключении экрана */
     .screen.reset * { animation: none !important; }
 
+    /* финальный экран тихой недели (design 2083:170): гифка и кнопка «В начало» */
+    .quiet-outro .outro-gif {
+      position: absolute;
+      left: 50%;
+      top: 35.98%;              /* 344px макета */
+      transform: translateX(-50%);
+      width: 44.81cqw;          /* 208×208 */
+      height: 44.81cqw;
+      z-index: 2;
+      object-fit: cover;
+      display: block;
+    }
+    .quiet-outro .outro-btn-slot { top: 62.76%; }   /* 600px макета */
+    .quiet-outro .outro-gif { opacity: 0; animation: fade-in .5s ease-out .1s forwards; }
+
     .close {
       position: absolute;
       top: 20.3cqw;
@@ -866,15 +1189,19 @@
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
+      html { scroll-behavior: auto; }
       .skill-fill { width: 30.85%; } /* сразу финальное состояние */
       .skill-num { opacity: 1; }
       .bubble, .bubble-tail { opacity: 1; transform: none; }
       .progress, .date-heading, .close, .cat, .fire, .card, .others, .chip,
-      .scene-texts, .course-cards, .fire-btn,
+      .scene-texts, .scene-texts .title, .scene-texts .caption,
+      .course-cards, .course-cards img, .fire-btn,
       .lesson-card, .finish-texts .t1, .finish-texts .t2,
-      .stat, .glow-a, .glow-b { opacity: 1; }
+      .stat, .glow-a, .glow-b, .outro-photo, .quiet-outro .outro-gif,
+      .intro h1, .intro-meta, .intro-spark, .intro-logo, .intro-next,
+      .chat-block .chat-hi, .chat-block .chat-bubble { opacity: 1; }
       .screen.tiptoe .fire { opacity: .87; } /* второй план остаётся приглушённым и без анимации */
-      .star { visibility: hidden; } /* искры скрыты без анимации */
+      .star, .finish-spark { visibility: hidden; } /* искры скрыты без анимации */
       .stories .screen { transition: none; }
     }
   </style>
@@ -898,16 +1225,93 @@
         <rect x="2" y="2" width="21" height="9" rx="2.5" fill="#fff"/>
       </g>
     </symbol>
+
+    <!-- мягкие волны на зелёной плашке: три тональных слоя, растягиваются по высоте плашки -->
+    <defs>
+      <linearGradient id="hero-wave-a" x1="0" y1="0" x2=".85" y2="1">
+        <stop offset="0" stop-color="#C6F14F" stop-opacity=".4"/>
+        <stop offset="1" stop-color="#C6F14F" stop-opacity=".04"/>
+      </linearGradient>
+      <linearGradient id="hero-wave-b" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#A8E10C" stop-opacity=".34"/>
+        <stop offset="1" stop-color="#A8E10C" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="hero-wave-c" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#3F5A0E" stop-opacity=".38"/>
+        <stop offset="1" stop-color="#3F5A0E" stop-opacity=".05"/>
+      </linearGradient>
+    </defs>
+    <symbol id="hero-waves" viewBox="0 0 440 705" preserveAspectRatio="none">
+      <path d="M-20 236 C 90 150, 190 250, 300 178 C 372 131, 412 96, 460 74 L460 -20 L-20 -20 Z" fill="url(#hero-wave-a)"/>
+      <path d="M-20 402 C 74 330, 168 402, 262 330 C 352 262, 404 190, 460 150 L460 -20 L-20 -20 Z" fill="url(#hero-wave-b)"/>
+      <path d="M-20 705 C 60 592, 176 566, 268 470 C 350 384, 396 300, 460 250 L460 725 L-20 725 Z" fill="url(#hero-wave-c)"/>
+    </symbol>
   </svg>
 
   <main class="stage">
 
+    <!-- Титульный слайд -->
+    <section class="intro">
+      <h1>Концепт фичи<br>«Наша неделя»</h1>
+      <div class="intro-meta">
+        <p class="who">Василиса Медведева</p>
+      </div>
+      <svg class="intro-spark s1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#fff" fill-opacity=".7"/></svg>
+      <svg class="intro-spark s2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#fff" fill-opacity=".7"/></svg>
+      <svg class="intro-spark s3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#fff" fill-opacity=".7"/></svg>
+      <!-- лого Art for Introvert: на зелёном берём версию со светлой подписью,
+           оригинал лежит рядом — assets/logo-art-for-introvert.svg -->
+      <img class="intro-logo" src="assets/logo-art-for-introvert.svg" alt="Art for Introvert">
+      <a class="intro-next" href="#brief" aria-label="К описанию фичи"><span aria-hidden="true">↓</span></a>
+    </section>
+
+    <!-- Подводка к решению: баблы проявляются по очереди (design 2014:1991) -->
+    <section class="chat-block" id="brief">
+      <div class="chat-col">
+        <div class="chat-hi">
+          <div class="chat-ava"><img src="assets/avatar.jpg" alt=""></div>
+          <div class="who"><b>Привет, команда Интроверта!</b><span>Василиса Медведева</span></div>
+        </div>
+
+        <div class="chat-bubble lead">
+          <h3>Описание фичи «Наша неделя»</h3>
+          <p>Я развиваю идею тамагочи, в которую продукт уже вложился. «Наша неделя» достраивает к нему эмоциональную связь. Пользователь получает короткую историю о том, как его действия изменили Интровертушку за эту неделю. Таким образом статистика превращается не в отчет, а в повод почувствовать собственный прогресс через персонажа, с которым прожил неделю.</p>
+        </div>
+
+        <div class="chat-bubble">
+          <h3>События, которые будем показывать</h3>
+          <p><b>Возвраты к недосмотренному</b> — Событие измеряющее волю, а не потребление. Вернуться к брошенному — самое трудное действие. Похвала снижает цену возврата и закрепляет привычку доводить начатое.</p>
+          <p><b>Частая категория</b> в продукте уже конвертируется в рост навыков Интровертушки — это его существующая механика. Мы делаем её главным ростом недели.</p>
+          <p><b>Досмотрел + начал</b> — Порознь не значат ничего: 5 из 6 — «доводишь до конца», 5 из 40 — «хватаешься и бросаешь».</p>
+        </div>
+
+        <div class="chat-bubble">
+          <h3>События, не будем <s>показывать</s></h3>
+          <p><b>Место в рейтинге</b> — Разрыв неотыгрываем: топ-1 — 6013, у большинства — 0. Продукт сам прячет место за «99+».</p>
+          <p><b>Самая долгая лекция</b> — «самая долгая» — свойство контента, а не выбор человека.</p>
+          <p><b>Минуты просмотра</b> — показывает не продуктивность, а вложенное внимание. Можно взять, но я не вижу в этом большой ценности.</p>
+          <p><b>Тесты</b> — не отдельное событие. Лекция считается завершённой только после тренажёра.</p>
+        </div>
+
+        <div class="chat-bubble">
+          <h3>Мотивация</h3>
+          <p>Пользователь возвращается не за статистикой, а чтобы увидеть последствия своих действий. Вместо оценки он получает благодарность: фича замечает не только результат, но и усилие — например, возвращение к недосмотренной лекции.</p>
+          <p>Каждый итог недели заканчивается одним небольшим следующим шагом, поэтому прогресс ощущается достижимым. Даже если неделя была пустой, Интровертушка не упрекает пользователя, а приглашает провести вместе всего несколько минут.</p>
+        </div>
+
+        <div class="chat-bubble">
+          <h3>Метрики</h3>
+          <p><b>Фича хвалит ровно то поведение, из которого состоит retention.</b></p>
+          <p><b>Недельный возврат</b> — вход в удержание, а удержание в подписочном продукте определяет LTV.</p>
+          <p><b>Доля вернувшихся к недосмотренному</b> — фича подсвечивает и награждает это действие.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Case 1: продуктивная неделя — proud, finish и «на цыпочках» -->
-    <section class="case-block">
+    <section class="case-block case--prod" id="case-productive">
       <header class="case-label">
         <h2>Продуктивная неделя</h2>
-        <p>Интровертушка благодарит пользователя за неделю. Костёр и цветовая палитра продолжают механику тамагочи, связывая экран с существующей системой заботы о герое.</p>
-        <p>Показываем любимую категорию пользователя и его достижения в других темах, чтобы сделать прогресс заметнее.</p>
       </header>
       <div class="case">
         <div class="phone">
@@ -921,7 +1325,9 @@
             <div class="island"></div>
             <div class="home" aria-hidden="true"></div>
             <div class="screen proud duo">
-              <div class="hero"></div>
+              <div class="hero">
+                <svg class="hero-waves" viewBox="0 0 440 705" preserveAspectRatio="none" aria-hidden="true"><use href="#hero-waves"/></svg>
+              </div>
               <div class="date-heading">14–20 июля</div>
               <div class="progress" aria-hidden="true"></div>
               <img class="close" src="assets/icon-close.svg" alt="">
@@ -974,7 +1380,7 @@
               </div>
               <div class="finish-texts">
                 <p class="t1">Ты возвращался к лекции три раза</p>
-                <p class="t2">и всё-таки досмотрел!</p>
+                <p class="t2">и всё-таки досмотрел!<svg class="finish-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="#FFE352"/></svg></p>
               </div>
               <div class="stat">
                 <div class="pill">5/6</div>
@@ -982,7 +1388,9 @@
               </div>
             </div>
             <div class="screen tiptoe duo">
-              <div class="hero"></div>
+              <div class="hero">
+                <svg class="hero-waves" viewBox="0 0 440 705" preserveAspectRatio="none" aria-hidden="true"><use href="#hero-waves"/></svg>
+              </div>
               <div class="date-heading">14–20 июля</div>
               <div class="progress" aria-hidden="true"></div>
               <img class="close" src="assets/icon-close.svg" alt="">
@@ -1097,6 +1505,19 @@
               </div>
               <div class="fire-btn">Начать</div>
             </div>
+            <!-- финальный экран: показывается, когда прогресс третьего экрана дошёл до конца -->
+            <div class="screen outro">
+              <div class="outro-photo">
+                <img src="assets/cats-outro.png" alt="Четыре кота смотрят в камеру">
+                <div class="outro-cap c1"><span>Ну и что они думают?</span></div>
+                <div class="outro-cap c2"><span>Понравилось, думаешь?</span></div>
+                <div class="outro-cap c3"><span>А что, если нет?</span></div>
+                <div class="outro-cap c4"><span>Досмотрели же<br>— значит, понравилось</span></div>
+              </div>
+              <div class="outro-btn-slot">
+                <button type="button" class="outro-btn" data-restart>В начало прототипа</button>
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1104,10 +1525,9 @@
     </section>
 
     <!-- Case 2: sad — мягкий вход, пружинные карточки -->
-    <section class="case-block">
+    <section class="case-block case--quiet">
       <header class="case-label">
         <h2>Тихая неделя</h2>
-        <p>По кнопке «Зажечь костёр» пользователь попадает к коротким лекциям и видео, которые уже начинал смотреть, но не досмотрел. По тапу на лекцию из предложенных начинаем проигрывать плеер.</p>
       </header>
       <div class="case">
         <div class="phone">
@@ -1121,7 +1541,9 @@
             <div class="island"></div>
             <div class="home" aria-hidden="true"></div>
             <div class="screen sad duo">
-              <div class="hero"></div>
+              <div class="hero">
+                <svg class="hero-waves" viewBox="0 0 440 705" preserveAspectRatio="none" aria-hidden="true"><use href="#hero-waves"/></svg>
+              </div>
               <div class="date-heading">14–20 июля</div>
               <div class="progress" aria-hidden="true"></div>
               <img class="close" src="assets/icon-close.svg" alt="">
@@ -1139,6 +1561,13 @@
               </div>
               <div class="fire-btn">Зажечь костёр</div>
             </div>
+            <!-- финальный экран: показывается, когда таймлайн тихой недели дошёл до конца -->
+            <div class="screen outro quiet-outro">
+              <img class="outro-gif" src="assets/cat-quiet-outro.gif" alt="Кот машет лапой">
+              <div class="outro-btn-slot">
+                <button type="button" class="outro-btn" data-restart>В начало</button>
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1151,33 +1580,88 @@
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const SEG_MS = 5000;   // длительность одного экрана
     const HOLD_MS = 200;   // после этого удержание считается паузой, а не тапом
-    const NUM_MS  = 1400;  // старт счётчика = animation-delay у .skill-num
+    const TICK_START = 1050; // старт тиков — сразу после появления числа (num-in на 1s)
+    const TICK_MS = 90;      // шаг между +1
+    const SKILL_FROM = 25.5, SKILL_TO = 30.85, TICKS = 7;
 
-    // счётчик «+7»: считает 1 -> 7 синхронно с ростом прогресс-бара скилла
-    const startCounter = (scr) => {
+    // тики «+1…+7» (Duolingo XP): каждый тик двигает бар на ступеньку,
+    // пульсирует заливку и щёлкает число; после последнего — блик по бару
+    const startSkillTicks = (scr) => {
       const el = scr.querySelector('.skill-num');
-      if (!el) return;
+      const fill = scr.querySelector('.skill-fill');
+      const skill = scr.querySelector('.skill');
+      if (!el || !fill) return;
       clearTimeout(el._wait);
       clearInterval(el._tick);
-      if (reduced) { el.textContent = '+7'; return; }
+      // сброс к началу: базовая ширина, без пульса и блика
+      fill.style.width = '';
+      fill.classList.remove('is-tick');
+      skill.classList.remove('is-shine');
+      if (reduced) { el.textContent = '+7'; fill.style.width = SKILL_TO + '%'; return; }
       el.textContent = '+1';
       el._wait = setTimeout(() => {
-        const t0 = performance.now();
-        el._tick = setInterval(() => {
-          const p = Math.min((performance.now() - t0) / 500, 1);
-          el.textContent = '+' + (1 + Math.round(p * 6));
-          if (p >= 1) clearInterval(el._tick);
-        }, 60);
-      }, NUM_MS);
+        let n = 0;
+        const step = (SKILL_TO - SKILL_FROM) / TICKS;
+        const tick = () => {
+          n++;
+          el.textContent = '+' + n;
+          fill.style.width = (SKILL_FROM + step * n) + '%';
+          fill.classList.remove('is-tick');
+          void fill.offsetWidth;            // перезапуск пульса на каждом тике
+          fill.classList.add('is-tick');
+          if (n >= TICKS) {
+            clearInterval(el._tick);
+            setTimeout(() => skill.classList.add('is-shine'), 140);
+          }
+        };
+        tick();
+        el._tick = setInterval(tick, TICK_MS);
+      }, TICK_START);
     };
+
+    // тики «1/6…5/6» на finish-экране: та же механика — пульс пилюли на каждом
+    // счёте, после последнего блик. Старт после приземления блока (.stat на 1.2s)
+    const startPillTicks = (scr) => {
+      const pill = scr.querySelector('.stat .pill');
+      if (!pill) return;
+      const stat = scr.querySelector('.stat');
+      clearTimeout(pill._wait);
+      clearInterval(pill._tick);
+      pill.classList.remove('is-tick');
+      stat.classList.remove('is-shine');
+      if (reduced) { pill.textContent = '5/6'; return; }
+      pill.textContent = '1/6';
+      pill._wait = setTimeout(() => {
+        let n = 0;
+        const tick = () => {
+          n++;
+          pill.textContent = n + '/6';
+          pill.classList.remove('is-tick');
+          void pill.offsetWidth;            // перезапуск пульса на каждом тике
+          pill.classList.add('is-tick');
+          if (n >= 5) {
+            clearInterval(pill._tick);
+            setTimeout(() => stat.classList.add('is-shine'), 140);
+          }
+        };
+        tick();
+        pill._tick = setInterval(tick, TICK_MS);
+      }, 1500);
+    };
+
+    const startCounter = (scr) => { startSkillTicks(scr); startPillTicks(scr); };
 
     // сторис-плеер: сегмент на экран, автопереход, тап влево/вправо, удержание — пауза
     const makeStory = (root) => {
       const screens = [...root.querySelectorAll('.screen')];
       const once = root.dataset.loop === 'once';
+      // финальный экран прототипа в прогрессе не участвует: сегментов столько,
+      // сколько собственно сторис-экранов. У него нет .progress — плеер
+      // останавливается на нём и ждёт кнопку
+      const storyScreens = screens.filter((s) => !s.classList.contains('outro'));
       screens.forEach((scr) => {
         const bar = scr.querySelector('.progress');
-        if (bar) bar.innerHTML = screens.map(() => '<span><i></i></span>').join('');
+        if (bar) bar.innerHTML = storyScreens.map(() => '<span><i></i></span>').join('');
       });
 
       let idx = -1, fill = null, anim = null, ended = false, activated = false, advancing = false, wd = 0, segMs = SEG_MS;
@@ -1266,12 +1750,24 @@
           return;
         }
         const r = root.getBoundingClientRect();
-        show(idx + (e.clientX - r.left > r.width / 2 ? 1 : -1));
+        const forward = e.clientX - r.left > r.width / 2;
+        // назад с первого экрана не уводим в конец флоу — просто играем его заново,
+        // вперёд с последнего возвращаемся в начало
+        if (forward) show(idx + 1 < screens.length ? idx + 1 : 0);
+        else         show(Math.max(idx - 1, 0));
       };
       root.addEventListener('pointerup', release);
       root.addEventListener('pointercancel', () => {
         clearTimeout(holdTimer);
         if (held) { held = false; root.classList.remove('is-held'); play(); }
+      });
+
+      // «В начало прототипа»: тап по кнопке не уходит в навигацию сторис
+      root.querySelectorAll('[data-restart]').forEach((btn) => {
+        ['pointerdown', 'pointerup'].forEach((type) => {
+          btn.addEventListener(type, (e) => { e.stopPropagation(); clearTimeout(holdTimer); });
+        });
+        btn.addEventListener('click', () => { show(0); play(); });
       });
 
       return {
@@ -1307,9 +1803,22 @@
     }, { threshold: .35 });
     document.querySelectorAll('.case').forEach((c) => io.observe(c));
 
+    // баблы: каждый проявляется сам, когда доходит до кадра при прокрутке
+    const chatItems = [...document.querySelectorAll('.chat-col > *')];
+    const chatIO = new IntersectionObserver((entries) => {
+      ioFired = true;
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        chatIO.unobserve(e.target);   // показали — больше не следим
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -12% 0px' });
+    chatItems.forEach((el) => chatIO.observe(el));
+
     // страховка: если IntersectionObserver недоступен, запускаем всё сразу
     setTimeout(() => {
       if (ioFired) return;
+      chatItems.forEach((el) => el.classList.add('is-in'));
       document.querySelectorAll('.case').forEach((c) => {
         c.classList.add('in-view');
         const story = byCase.get(c);
