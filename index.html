@@ -756,6 +756,13 @@
       color: #202020;
       font-size: 3cqw;
       font-weight: 600;
+      /* «Начать» — настоящий <button>, «Зажечь костёр» пока <div>: гасим стили агента,
+         иначе у кнопки своя рамка, свой шрифт и отступы, и две кнопки разъедутся */
+      appearance: none;
+      border: 0;
+      padding: 0;
+      font-family: inherit;
+      cursor: pointer;
     }
 
     /* ---- второй экран продуктивной недели (design 2058:5536) ---- */
@@ -1392,7 +1399,7 @@
           <h3>События, которые не будем показывать</h3>
           <p><b>Место в рейтинге</b> — Разрыв неотыгрываем: топ-1 — 6013, у большинства — 0. Продукт сам прячет место за «99+».</p>
           <p><b>Самая долгая лекция</b> — «самая долгая» — свойство контента, а не выбор человека.</p>
-          <p><b>Минуты просмотра</b> — показывает не продуктивность, а вложенное внимание. Можно взять, но я не вижу в этом большой ценности.</p>
+          <p><b>Минуты просмотра</b> — показывает вложенное внимание. Можно взять, но я не вижу в этом большой ценности.</p>
           <p><b>Тесты</b> — не отдельное событие. Лекция считается завершённой только после тренажёра.</p>
         </div>
 
@@ -1476,7 +1483,8 @@
               <div class="glow-a" aria-hidden="true"></div>
               <div class="date-heading">14–20 июля</div>
               <div class="progress" aria-hidden="true"></div>
-              <img class="close" src="assets/icon-close-dark.svg" alt="">
+              <!-- на белом экране крестик зелёный (design 2096:285): круг #94CB09 на 20%, крест #88BD00 -->
+              <img class="close" src="assets/icon-close-green.svg" alt="">
               <div class="lesson-card">
                 <img class="cover" src="assets/lesson-cover.png" alt="Лекция: как управлять тревогой">
                 <div class="passed">Пройдено</div>
@@ -1608,7 +1616,7 @@
                 <img class="c1" src="assets/reach-card-1.png" alt="Лекция «Тревожно-избегающая диада», осталось 16 минут">
                 <img class="c2" src="assets/reach-card-2.png" alt="Лекция «Нейробиология тревожных расстройств», осталось 25 минут">
               </div>
-              <div class="fire-btn">Начать</div>
+              <button type="button" class="fire-btn" data-goto-end>Начать</button>
             </div>
             <!-- финальный экран: показывается, когда прогресс третьего экрана дошёл до конца -->
             <div class="screen outro">
@@ -1890,13 +1898,19 @@
         if (held) { held = false; root.classList.remove('is-held'); play(); }
       });
 
-      // «В начало прототипа»: тап по кнопке не уходит в навигацию сторис
-      root.querySelectorAll('[data-restart]').forEach((btn) => {
+      // кнопки внутри макета: тап по ним не уходит в навигацию сторис
+      const кнопка = (sel, действие) => root.querySelectorAll(sel).forEach((btn) => {
         ['pointerdown', 'pointerup'].forEach((type) => {
           btn.addEventListener(type, (e) => { e.stopPropagation(); clearTimeout(holdTimer); });
         });
-        btn.addEventListener('click', () => { show(0); play(); });
+        btn.addEventListener('click', действие);
       });
+      // «В начало прототипа»
+      кнопка('[data-restart]', () => { show(0); play(); });
+      // «Начать» — сразу на финальный экран с котиками. У него нет .progress,
+      // поэтому show() не заводит таймер и плеер там останавливается, как при
+      // обычном доигрывании до конца
+      кнопка('[data-goto-end]', () => show(screens.length - 1));
 
       return {
         init: () => show(0),   // первый экран виден сразу, анимации ждут .in-view
